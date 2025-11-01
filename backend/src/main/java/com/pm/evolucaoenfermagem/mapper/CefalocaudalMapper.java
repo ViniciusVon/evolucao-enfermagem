@@ -18,19 +18,11 @@ public class CefalocaudalMapper {
         dto.setRa(cefalocaudal.getRa());
         dto.setReagePalpitacao(cefalocaudal.getReagePalpitacao());
         dto.setRha(cefalocaudal.getRha());
-
-        // Enums
-        if (cefalocaudal.getAbdome() != null)
-            dto.setAbdome(cefalocaudal.getAbdome().name());
-        if (cefalocaudal.getExtremidades() != null)
-            dto.setExtremidades(cefalocaudal.getExtremidades().name());
-        if (cefalocaudal.getMucosas() != null)
-            dto.setMucosas(cefalocaudal.getMucosas().name());
-        if (cefalocaudal.getMvf() != null)
-            dto.setMvf(cefalocaudal.getMvf().name());
-        if (cefalocaudal.getPercussao() != null)
-            dto.setPercussao(cefalocaudal.getPercussao().name());
-
+        dto.setAbdome(cefalocaudal.getAbdome());
+        dto.setExtremidades(cefalocaudal.getExtremidades());
+        dto.setMucosas(cefalocaudal.getMucosas());
+        dto.setMvf(cefalocaudal.getMvf());
+        dto.setPercussao(cefalocaudal.getPercussao());
         dto.setTec(cefalocaudal.getTec());
 
         if (cefalocaudal.getPaciente() != null) {
@@ -49,23 +41,16 @@ public class CefalocaudalMapper {
         cefalocaudal.setRa(dto.getRa());
         cefalocaudal.setReagePalpitacao(dto.getReagePalpitacao());
         cefalocaudal.setRha(dto.getRha());
+        cefalocaudal.setAbdome(dto.getAbdome());
+        cefalocaudal.setExtremidades(dto.getExtremidades());
+        cefalocaudal.setMucosas(dto.getMucosas());
+        cefalocaudal.setMvf(dto.getMvf());
+        cefalocaudal.setPercussao(dto.getPercussao());
+        cefalocaudal.setTec(dto.getTec());
         cefalocaudal.setPaciente(paciente);
         cefalocaudal.setCreatedAt(LocalDateTime.now());
         cefalocaudal.setUpdatedAt(null);
         cefalocaudal.setDeletedAt(null);
-
-        if (dto.getAbdome() != null)
-            cefalocaudal.setAbdome(AbdomeEnum.valueOf(dto.getAbdome()));
-        if (dto.getExtremidades() != null)
-            cefalocaudal.setExtremidades(ExtremidadesEnum.valueOf(dto.getExtremidades()));
-        if (dto.getMucosas() != null)
-            cefalocaudal.setMucosas(MucosasEnum.valueOf(dto.getMucosas()));
-        if (dto.getMvf() != null)
-            cefalocaudal.setMvf(MvfEnum.valueOf(dto.getMvf()));
-        if (dto.getPercussao() != null)
-            cefalocaudal.setPercussao(PercussaoEnum.valueOf(dto.getPercussao()));
-
-        cefalocaudal.setTec(dto.getTec());
 
         return cefalocaudal;
     }
@@ -77,18 +62,11 @@ public class CefalocaudalMapper {
         cefalocaudal.setReagePalpitacao(dto.getReagePalpitacao());
         cefalocaudal.setRha(dto.getRha());
         cefalocaudal.setPaciente(paciente);
-
-        if (dto.getAbdome() != null)
-            cefalocaudal.setAbdome(AbdomeEnum.valueOf(dto.getAbdome()));
-        if (dto.getExtremidades() != null)
-            cefalocaudal.setExtremidades(ExtremidadesEnum.valueOf(dto.getExtremidades()));
-        if (dto.getMucosas() != null)
-            cefalocaudal.setMucosas(MucosasEnum.valueOf(dto.getMucosas()));
-        if (dto.getMvf() != null)
-            cefalocaudal.setMvf(MvfEnum.valueOf(dto.getMvf()));
-        if (dto.getPercussao() != null)
-            cefalocaudal.setPercussao(PercussaoEnum.valueOf(dto.getPercussao()));
-
+        cefalocaudal.setAbdome(dto.getAbdome());
+        cefalocaudal.setExtremidades(dto.getExtremidades());
+        cefalocaudal.setMucosas(dto.getMucosas());
+        cefalocaudal.setMvf(dto.getMvf());
+        cefalocaudal.setPercussao(dto.getPercussao());
         cefalocaudal.setTec(dto.getTec());
     }
 }

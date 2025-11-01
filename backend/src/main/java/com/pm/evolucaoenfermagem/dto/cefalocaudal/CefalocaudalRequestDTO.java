@@ -1,5 +1,6 @@
 package com.pm.evolucaoenfermagem.dto.cefalocaudal;
 
+import com.pm.evolucaoenfermagem.enums.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -17,20 +18,15 @@ public class CefalocaudalRequestDTO {
 
     private Boolean rha;
 
-    @Size(min = 1, max = 255)
-    private String abdome;
+    private AbdomeEnum abdome;
 
-    @Size(min = 1, max = 255)
-    private String extremidades;
+    private ExtremidadesEnum extremidades;
 
-    @Size(min = 1, max = 255)
-    private String mucosas;
+    private MucosasEnum mucosas;
 
-    @Size(min = 1, max = 255)
-    private String mvf;
+    private MvfEnum mvf;
 
-    @Size(min = 1, max = 255)
-    private String percussao;
+    private PercussaoEnum percussao;
 
     private Integer tec;
 
@@ -77,43 +73,43 @@ public class CefalocaudalRequestDTO {
         this.rha = rha;
     }
 
-    public String getAbdome() {
+    public AbdomeEnum getAbdome() {
         return abdome;
     }
 
-    public void setAbdome(String abdome) {
+    public void setAbdome(AbdomeEnum abdome) {
         this.abdome = abdome;
     }
 
-    public String getExtremidades() {
+    public ExtremidadesEnum getExtremidades() {
         return extremidades;
     }
 
-    public void setExtremidades(String extremidades) {
+    public void setExtremidades(ExtremidadesEnum extremidades) {
         this.extremidades = extremidades;
     }
 
-    public String getMucosas() {
+    public MucosasEnum getMucosas() {
         return mucosas;
     }
 
-    public void setMucosas(String mucosas) {
+    public void setMucosas(MucosasEnum mucosas) {
         this.mucosas = mucosas;
     }
 
-    public String getMvf() {
+    public MvfEnum getMvf() {
         return mvf;
     }
 
-    public void setMvf(String mvf) {
+    public void setMvf(MvfEnum mvf) {
         this.mvf = mvf;
     }
 
-    public String getPercussao() {
+    public PercussaoEnum getPercussao() {
         return percussao;
     }
 
-    public void setPercussao(String percussao) {
+    public void setPercussao(PercussaoEnum percussao) {
         this.percussao = percussao;
     }
 

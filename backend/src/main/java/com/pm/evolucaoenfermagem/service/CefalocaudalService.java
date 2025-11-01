@@ -17,7 +17,6 @@ import java.util.UUID;
 @Service
 public class CefalocaudalService {
     private CefalocaudalRepository cefalocaudalRepository;
-
     private PacienteRepository pacienteRepository;
 
     public CefalocaudalService(CefalocaudalRepository cefalocaudalRepository, PacienteRepository pacienteRepository) {
@@ -58,7 +57,7 @@ public class CefalocaudalService {
 
         CefalocaudalMapper.updateEntityFromDto(dto, cefalocaudalExistente, paciente);
 
-        Cefalocaudal atualizado =  cefalocaudalRepository.save(cefalocaudalExistente);
+        Cefalocaudal atualizado = cefalocaudalRepository.save(cefalocaudalExistente);
         return CefalocaudalMapper.toDto(atualizado);
     }
 
