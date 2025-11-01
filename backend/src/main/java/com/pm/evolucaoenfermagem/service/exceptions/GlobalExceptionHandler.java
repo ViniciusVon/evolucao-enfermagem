@@ -56,9 +56,19 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(CefalocaudalNaoEncontradoException.class)
-    public ResponseEntity<Map<String, String>> handleCefalocaudalNaoEncontrado(CefalocaudalNaoEncontradoException ex) {
+    public ResponseEntity<Map<String, String>> handleCefalocaudalNaoEncontradoException(CefalocaudalNaoEncontradoException ex) {
 
         log.warn("Cefalocaudal não encontrado {}", ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(EvolucaoEnfermagemNaoEncontradaException.class)
+    public ResponseEntity<Map<String, String>> handleEvolucaoEnfermagemNaoEncontradaException(EvolucaoEnfermagemNaoEncontradaException ex) {
+
+        log.warn("Evolução enfermagem não encontrada {}", ex.getMessage());
         Map<String, String> errors = new HashMap<>();
         errors.put("message", ex.getMessage());
 
