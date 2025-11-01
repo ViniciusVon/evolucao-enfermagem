@@ -30,7 +30,7 @@ public class DispositivoController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar dispositivo por ID")
-    public ResponseEntity<DispositivoResponseDTO> getPorId(@PathVariable UUID id) {
+    public ResponseEntity<DispositivoResponseDTO> buscarPorId(@PathVariable UUID id) {
         return ResponseEntity.ok(dispositivoService.buscarPorId(id));
     }
 
