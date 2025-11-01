@@ -33,14 +33,7 @@ public class ExameFisicoService {
         Paciente paciente = pacienteRepository.findById(dto.getPacienteId())
                 .orElseThrow(() -> new PacienteNaoEncontradoException("Paciente não encontrado"));
 
-        Edema edema = null;
-        if (dto.getEdemaId() != null) {
-            edema = edemaRepository.findById(dto.getEdemaId())
-                    .orElseThrow(() -> new RuntimeException("Edema não encontrado"));
-        }
-
         ExameFisico exame = new ExameFisico();
-        ExameFisicoMapper.updateEntityFromDto(dto, exame, paciente, edema);
 
         exameFisicoRepository.save(exame);
 
@@ -48,14 +41,14 @@ public class ExameFisicoService {
     }
 
     @Transactional(readOnly = true)
-    public ExameFisicoResponseDTO getById(UUID id) {
+    public ExameFisicoResponseDTO buscarPorId(UUID id) {
         ExameFisico exame = exameFisicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Exame físico não encontrado"));
         return ExameFisicoMapper.toDto(exame);
     }
 
     @Transactional(readOnly = true)
-    public List<ExameFisicoResponseDTO> getAll() {
+    public List<ExameFisicoResponseDTO> BuscarTodos() {
         return exameFisicoRepository.findAll()
                 .stream()
                 .map(ExameFisicoMapper::toDto)

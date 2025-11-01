@@ -27,13 +27,13 @@ public class ExameFisicoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ExameFisicoResponseDTO> getById(@PathVariable UUID id) {
-        ExameFisicoResponseDTO response = exameFisicoService.getById(id);
+        ExameFisicoResponseDTO response = exameFisicoService.buscarPorId(id);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
     public ResponseEntity<List<ExameFisicoResponseDTO>> getAll() {
-        List<ExameFisicoResponseDTO> response = exameFisicoService.getAll();
+        List<ExameFisicoResponseDTO> response = exameFisicoService.BuscarTodos();
         return ResponseEntity.ok(response);
     }
 
