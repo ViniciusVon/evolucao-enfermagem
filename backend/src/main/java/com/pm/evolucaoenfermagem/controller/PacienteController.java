@@ -22,20 +22,22 @@ public class PacienteController {
     }
 
     @GetMapping
-    @Operation(summary = "Get Pacientes")
-    public ResponseEntity<List<PacienteResponseDTO>> getPacientes() {
-        List<PacienteResponseDTO> pacienteDTOLista = pacienteService.buscarTodos();
-        return ResponseEntity.ok().body(pacienteDTOLista);
+    @Operation(summary = "Listar todos os Pacientes")
+    public ResponseEntity<List<PacienteResponseDTO>> buscarTodos() {
+        return ResponseEntity.ok(pacienteService.buscarTodos());
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Buscar paciente por ID")
+    public ResponseEntity<PacienteResponseDTO> buscarPorId(@PathVariable UUID id) {
+        return ResponseEntity.ok().body(pacienteService.buscarPorId(id));
     }
 
     @PostMapping
     @Operation(summary = "Criar um novo paciente")
     public ResponseEntity<PacienteResponseDTO> criarPacientes(
-            @RequestBody PacienteRequestDTO pacienteRequestDTO) {
-
-        PacienteResponseDTO pacienteResponseDTO = pacienteService.salvar(pacienteRequestDTO);
-
-        return ResponseEntity.ok().body(pacienteResponseDTO);
+            @RequestBody PacienteRequestDTO dto) {
+        return ResponseEntity.ok(pacienteService.criar(dto));
     }
 
     @PutMapping("/{id}")
@@ -43,18 +45,13 @@ public class PacienteController {
     public ResponseEntity<PacienteResponseDTO> atualizarPaciente(
             @PathVariable UUID id,
             @RequestBody PacienteRequestDTO pacienteRequestDTO) {
-
-        PacienteResponseDTO pacienteResponseDTO = pacienteService.atualizar(id, pacienteRequestDTO);
-
-        return ResponseEntity.ok().body(pacienteResponseDTO);
+        return  ResponseEntity.ok(pacienteService.atualizar(id, pacienteRequestDTO));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletar um paciente existente")
     public ResponseEntity<Void> deletarPaciente(@PathVariable UUID id) {
-
         pacienteService.deletar(id);
-
         return ResponseEntity.noContent().build();
     }
 }
