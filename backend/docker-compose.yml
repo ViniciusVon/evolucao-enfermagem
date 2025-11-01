@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: evolucao-enfermagem
+    restart: always
+    volumes:
+      - ./target:/app/target
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    container_name: evolucao-enfermagem-db
+    restart: always
+    environment:
+      POSTGRES_DB: evolucao-enfermagem-db
+      POSTGRES_USER: enfermeiro
+      POSTGRES_PASSWORD: enfermagem123
+    ports:
+      - "5430:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
