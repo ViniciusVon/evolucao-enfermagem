@@ -1,34 +1,16 @@
-package com.pm.evolucaoenfermagem.model;
-
-import jakarta.persistence.*;
+package com.pm.evolucaoenfermagem.dto.respiracao;
 
 import java.math.BigDecimal;
 import java.util.UUID;
 
-@Entity
-@Table(name = "respiracao")
-public class Respiracao extends BaseEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class RespiracaoResponseDTO {
     private UUID id;
-
     private Boolean aa;
-
     private Boolean vm;
-
     private Boolean cn;
-
     private BigDecimal litros;
 
     private String outro;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "evolucao_enfermagem_id", referencedColumnName = "id", nullable = false)
-    private EvolucaoEnfermagem evolucaoEnfermagem;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "paciente_id", nullable = false)
-    private Paciente paciente;
 
     public UUID getId() {
         return id;
@@ -76,21 +58,5 @@ public class Respiracao extends BaseEntity {
 
     public void setOutro(String outro) {
         this.outro = outro;
-    }
-
-    public EvolucaoEnfermagem getEvolucaoEnfermagem() {
-        return evolucaoEnfermagem;
-    }
-
-    public void setEvolucaoEnfermagem(EvolucaoEnfermagem evolucaoEnfermagem) {
-        this.evolucaoEnfermagem = evolucaoEnfermagem;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
     }
 }

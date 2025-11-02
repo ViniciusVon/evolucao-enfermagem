@@ -74,4 +74,24 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(errors);
     }
+
+    @ExceptionHandler(ExameComplementarNaoEncontradoException.class)
+    public ResponseEntity<Map<String, String>> handleExameComplementarNaoEncontradoException(ExameComplementarNaoEncontradoException ex) {
+
+        log.warn("Exame complementar não encontrado {}", ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+
+        return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(RespiracaoNaoEncontradaException.class)
+    public ResponseEntity<Map<String, String>> handleRespiracaoNaoEncontradaException(RespiracaoNaoEncontradaException ex) {
+
+        log.warn("Respiração não encontrada {}", ex.getMessage());
+        Map<String, String> errors = new HashMap<>();
+        errors.put("message", ex.getMessage());
+
+        return ResponseEntity.badRequest().body(errors);
+    }
 }
