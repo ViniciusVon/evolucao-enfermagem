@@ -17,7 +17,6 @@ public class ExameFisico extends BaseEntity {
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
-    // 🔹 Subtabelas (opcionais)
     @OneToOne(mappedBy = "exameFisico", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ExameFisicoAbd exameFisicoAbd;
 

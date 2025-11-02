@@ -4,9 +4,6 @@ import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoRequestDTO;
 import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoResponseDTO;
 import com.pm.evolucaoenfermagem.model.*;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
-
 public class ExameFisicoMapper {
 
     public static ExameFisicoResponseDTO toDto(ExameFisico exameFisico) {
@@ -33,7 +30,7 @@ public class ExameFisicoMapper {
             ExameFisicoAcv acv = exameFisico.getExameFisicoAcv();
             dto.setRitmoRegular(acv.getRitmoRegular());
             dto.setTaquicardico(acv.getTaquicardico());
-            dto.setTec(acv.getTec());
+            dto.setTec(acv.getTecMaiorQue2Segundos());
             dto.setPulsos(acv.getPulsos());
         }
 
@@ -104,7 +101,7 @@ public class ExameFisicoMapper {
             ExameFisicoAcv acv = new ExameFisicoAcv();
             acv.setRitmoRegular(dto.getRitmoRegular());
             acv.setTaquicardico(dto.getTaquicardico());
-            acv.setTec(dto.getTec());
+            acv.setTecMaiorQue2Segundos(dto.getTec());
             acv.setPulsos(dto.getPulsos());
             acv.setExameFisico(exame);
             exame.setExameFisicoAcv(acv);
@@ -193,7 +190,7 @@ public class ExameFisicoMapper {
             }
             acv.setRitmoRegular(dto.getRitmoRegular());
             acv.setTaquicardico(dto.getTaquicardico());
-            acv.setTec(dto.getTec());
+            acv.setTecMaiorQue2Segundos(dto.getTec());
             acv.setPulsos(dto.getPulsos());
         }
 

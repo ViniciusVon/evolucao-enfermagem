@@ -3,6 +3,7 @@ package com.pm.evolucaoenfermagem.controller;
 import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoRequestDTO;
 import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoResponseDTO;
 import com.pm.evolucaoenfermagem.service.ExameFisicoService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("pacientes/exame-fisico")
+@Tag(name = "Exame Fisico", description = "API para gerenciar exames físicos")
 public class ExameFisicoController {
 
     private final ExameFisicoService exameFisicoService;
