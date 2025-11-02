@@ -18,7 +18,10 @@ public class EvolucaoEnfermagemMapper {
         dto.setEmUsoDe(evolucaoEnfermagem.getEmUsoDe());
         dto.setEstadoGeral(evolucaoEnfermagem.getEstadoGeral());
         dto.setEstadoPaciente(evolucaoEnfermagem.getEstadoPaciente());
-        dto.setPacienteId(evolucaoEnfermagem.getPaciente().getId());
+        if (evolucaoEnfermagem.getPaciente() != null) {
+            dto.setPacienteId(evolucaoEnfermagem.getPaciente().getId());
+            dto.setPacienteNome(evolucaoEnfermagem.getPaciente().getNome());
+        }
 
         return dto;
     }
