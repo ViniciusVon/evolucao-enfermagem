@@ -30,7 +30,7 @@ public class ExameFisicoMapper {
             ExameFisicoAcv acv = exameFisico.getExameFisicoAcv();
             dto.setRitmoRegular(acv.getRitmoRegular());
             dto.setTaquicardico(acv.getTaquicardico());
-            dto.setTec(acv.getTecMaiorQue2Segundos());
+            dto.setTecMaiorQue2Segundos(acv.getTecMaiorQue2Segundos());
             dto.setPulsos(acv.getPulsos());
         }
 
@@ -97,11 +97,11 @@ public class ExameFisicoMapper {
         }
 
         // Subtabela ACV
-        if (dto.getRitmoRegular() != null || dto.getTaquicardico() != null || dto.getTec() != null || dto.getPulsos() != null) {
+        if (dto.getRitmoRegular() != null || dto.getTaquicardico() != null || dto.getTecMaiorQue2Segundos() != null || dto.getPulsos() != null) {
             ExameFisicoAcv acv = new ExameFisicoAcv();
             acv.setRitmoRegular(dto.getRitmoRegular());
             acv.setTaquicardico(dto.getTaquicardico());
-            acv.setTecMaiorQue2Segundos(dto.getTec());
+            acv.setTecMaiorQue2Segundos(dto.getTecMaiorQue2Segundos());
             acv.setPulsos(dto.getPulsos());
             acv.setExameFisico(exame);
             exame.setExameFisicoAcv(acv);
@@ -181,7 +181,7 @@ public class ExameFisicoMapper {
         }
 
         // Subtabela ACV
-        if (dto.getRitmoRegular() != null || dto.getTaquicardico() != null || dto.getTec() != null || dto.getPulsos() != null) {
+        if (dto.getRitmoRegular() != null || dto.getTaquicardico() != null || dto.getTecMaiorQue2Segundos() != null || dto.getPulsos() != null) {
             ExameFisicoAcv acv = exame.getExameFisicoAcv();
             if (acv == null) {
                 acv = new ExameFisicoAcv();
@@ -190,7 +190,7 @@ public class ExameFisicoMapper {
             }
             acv.setRitmoRegular(dto.getRitmoRegular());
             acv.setTaquicardico(dto.getTaquicardico());
-            acv.setTecMaiorQue2Segundos(dto.getTec());
+            acv.setTecMaiorQue2Segundos(dto.getTecMaiorQue2Segundos());
             acv.setPulsos(dto.getPulsos());
         }
 

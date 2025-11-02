@@ -2,7 +2,6 @@ package com.pm.evolucaoenfermagem.service;
 
 import com.pm.evolucaoenfermagem.dto.dispositivo.DispositivoRequestDTO;
 import com.pm.evolucaoenfermagem.dto.dispositivo.DispositivoResponseDTO;
-import com.pm.evolucaoenfermagem.enums.TipoDispositivoEnum;
 import com.pm.evolucaoenfermagem.mapper.DispositivoMapper;
 import com.pm.evolucaoenfermagem.model.*;
 import com.pm.evolucaoenfermagem.repository.DispositivoRepository;

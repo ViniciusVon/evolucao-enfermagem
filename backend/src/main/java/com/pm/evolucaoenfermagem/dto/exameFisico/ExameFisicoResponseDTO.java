@@ -19,7 +19,7 @@ public class ExameFisicoResponseDTO {
 
     private Boolean ritmoRegular;
     private Boolean taquicardico;
-    private Long tec;
+    private Boolean tecMaiorQue2Segundos;
     private PulsosPerifericosEnum pulsos;
 
     private Boolean semRa;
@@ -116,12 +116,12 @@ public class ExameFisicoResponseDTO {
         this.taquicardico = taquicardico;
     }
 
-    public Long getTec() {
-        return tec;
+    public Boolean getTecMaiorQue2Segundos() {
+        return tecMaiorQue2Segundos;
     }
 
-    public void setTec(Long tec) {
-        this.tec = tec;
+    public void setTecMaiorQue2Segundos(Boolean tecMaiorQue2Segundos) {
+        this.tecMaiorQue2Segundos = tecMaiorQue2Segundos;
     }
 
     public PulsosPerifericosEnum getPulsos() {

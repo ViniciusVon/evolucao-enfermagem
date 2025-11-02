@@ -2,7 +2,6 @@ package com.pm.evolucaoenfermagem.dto.cefalocaudal;
 
 import com.pm.evolucaoenfermagem.enums.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public class CefalocaudalResponseDTO {
 
     private PercussaoEnum percussao;
 
-    private Integer tec;
+    private Boolean tecMaiorQue2Segundos;
 
     @NotNull
     private UUID pacienteId;
@@ -124,12 +123,12 @@ public class CefalocaudalResponseDTO {
         this.percussao = percussao;
     }
 
-    public Integer getTec() {
-        return tec;
+    public Boolean getTecMaiorQue2Segundos() {
+        return tecMaiorQue2Segundos;
     }
 
-    public void setTec(Integer tec) {
-        this.tec = tec;
+    public void setTecMaiorQue2Segundos(Boolean tecMaiorQue2Segundos) {
+        this.tecMaiorQue2Segundos = tecMaiorQue2Segundos;
     }
 
     public UUID getPacienteId() {

@@ -2,7 +2,6 @@ package com.pm.evolucaoenfermagem.mapper;
 
 import com.pm.evolucaoenfermagem.dto.cefalocaudal.CefalocaudalRequestDTO;
 import com.pm.evolucaoenfermagem.dto.cefalocaudal.CefalocaudalResponseDTO;
-import com.pm.evolucaoenfermagem.enums.*;
 import com.pm.evolucaoenfermagem.model.Cefalocaudal;
 import com.pm.evolucaoenfermagem.model.Paciente;
 
@@ -23,7 +22,7 @@ public class CefalocaudalMapper {
         dto.setMucosas(cefalocaudal.getMucosas());
         dto.setMvf(cefalocaudal.getMvf());
         dto.setPercussao(cefalocaudal.getPercussao());
-        dto.setTec(cefalocaudal.getTec());
+        dto.setTecMaiorQue2Segundos(cefalocaudal.getTecMaiorQue2Segundos());
 
         if (cefalocaudal.getPaciente() != null) {
             dto.setPacienteId(cefalocaudal.getPaciente().getId());
@@ -46,7 +45,7 @@ public class CefalocaudalMapper {
         cefalocaudal.setMucosas(dto.getMucosas());
         cefalocaudal.setMvf(dto.getMvf());
         cefalocaudal.setPercussao(dto.getPercussao());
-        cefalocaudal.setTec(dto.getTec());
+        cefalocaudal.setTecMaiorQue2Segundos(dto.getTecMaiorQue2Segundos());
         cefalocaudal.setPaciente(paciente);
         cefalocaudal.setCreatedAt(LocalDateTime.now());
         cefalocaudal.setUpdatedAt(null);
@@ -67,6 +66,6 @@ public class CefalocaudalMapper {
         cefalocaudal.setMucosas(dto.getMucosas());
         cefalocaudal.setMvf(dto.getMvf());
         cefalocaudal.setPercussao(dto.getPercussao());
-        cefalocaudal.setTec(dto.getTec());
+        cefalocaudal.setTecMaiorQue2Segundos(dto.getTecMaiorQue2Segundos());
     }
 }

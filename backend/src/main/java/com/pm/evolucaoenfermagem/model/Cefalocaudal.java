@@ -23,7 +23,7 @@ public class Cefalocaudal extends BaseEntity {
 
     private Boolean reagePalpitacao;
 
-    private Integer tec;
+    private Boolean tecMaiorQue2Segundos;
 
     @Enumerated(EnumType.STRING)
     private MucosasEnum mucosas;
@@ -95,12 +95,12 @@ public class Cefalocaudal extends BaseEntity {
         this.reagePalpitacao = reagePalpitacao;
     }
 
-    public Integer getTec() {
-        return tec;
+    public Boolean getTecMaiorQue2Segundos() {
+        return tecMaiorQue2Segundos;
     }
 
-    public void setTec(Integer tec) {
-        this.tec = tec;
+    public void setTecMaiorQue2Segundos(Boolean tecMaiorQue2Segundos) {
+        this.tecMaiorQue2Segundos = tecMaiorQue2Segundos;
     }
 
     public MucosasEnum getMucosas() {

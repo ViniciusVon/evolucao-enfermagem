@@ -18,7 +18,7 @@ public class ExameFisicoRequestDTO {
     // Subtabela ACV
     private Boolean ritmoRegular;
     private Boolean taquicardico;
-    private Long tec;
+    private Boolean tecMaiorQue2Segundos;
     private PulsosPerifericosEnum pulsos;
 
     // Subtabela AR
@@ -70,8 +70,13 @@ public class ExameFisicoRequestDTO {
     public Boolean getTaquicardico() { return taquicardico; }
     public void setTaquicardico(Boolean taquicardico) { this.taquicardico = taquicardico; }
 
-    public Long getTec() { return tec; }
-    public void setTec(Long tec) { this.tec = tec; }
+    public Boolean getTecMaiorQue2Segundos() {
+        return tecMaiorQue2Segundos;
+    }
+
+    public void setTecMaiorQue2Segundos(Boolean tecMaiorQue2Segundos) {
+        this.tecMaiorQue2Segundos = tecMaiorQue2Segundos;
+    }
 
     public PulsosPerifericosEnum getPulsos() { return pulsos; }
     public void setPulsos(PulsosPerifericosEnum pulsos) { this.pulsos = pulsos; }
