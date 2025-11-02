@@ -13,11 +13,23 @@ public class ExameComplementar extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private Date data_exame;
+    private Date dataExame;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
+
+    @OneToOne(mappedBy = "exameComplementar", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ExameComplementarEletrolitos exameComplementarEletrolitos;
+
+    @OneToOne(mappedBy = "exameComplementar", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ExameComplementarEnzimaHepatica exameComplementarEnzimaHepatica;
+
+    @OneToOne(mappedBy = "exameComplementar", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ExameComplementarFuncaoRenal exameComplementarFuncaoRenal;
+
+    @OneToOne(mappedBy = "exameComplementar", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ExameComplementarHemograma exameComplementarHemograma;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exameComplementar")
     private List<ExameComplementarOutros> exameComplementarOutros;
@@ -30,12 +42,52 @@ public class ExameComplementar extends BaseEntity {
         this.id = id;
     }
 
-    public Date getData_exame() {
-        return data_exame;
+    public Date getDataExame() {
+        return dataExame;
     }
 
-    public void setData_exame(Date data_exame) {
-        this.data_exame = data_exame;
+    public void setDataExame(Date data_exame) {
+        this.dataExame = data_exame;
+    }
+
+    public ExameComplementarEletrolitos getExameComplementarEletrolitos() {
+        return exameComplementarEletrolitos;
+    }
+
+    public void setExameComplementarEletrolitos(ExameComplementarEletrolitos exameComplementarEletrolitos) {
+        this.exameComplementarEletrolitos = exameComplementarEletrolitos;
+    }
+
+    public ExameComplementarEnzimaHepatica getExameComplementarEnzimaHepatica() {
+        return exameComplementarEnzimaHepatica;
+    }
+
+    public void setExameComplementarEnzimaHepatica(ExameComplementarEnzimaHepatica exameComplementarEnzimaHepatica) {
+        this.exameComplementarEnzimaHepatica = exameComplementarEnzimaHepatica;
+    }
+
+    public ExameComplementarFuncaoRenal getExameComplementarFuncaoRenal() {
+        return exameComplementarFuncaoRenal;
+    }
+
+    public void setExameComplementarFuncaoRenal(ExameComplementarFuncaoRenal exameComplementarFuncaoRenal) {
+        this.exameComplementarFuncaoRenal = exameComplementarFuncaoRenal;
+    }
+
+    public ExameComplementarHemograma getExameComplementarHemograma() {
+        return exameComplementarHemograma;
+    }
+
+    public void setExameComplementarHemograma(ExameComplementarHemograma exameComplementarHemograma) {
+        this.exameComplementarHemograma = exameComplementarHemograma;
+    }
+
+    public List<ExameComplementarOutros> getExameComplementarOutros() {
+        return exameComplementarOutros;
+    }
+
+    public void setExameComplementarOutros(List<ExameComplementarOutros> exameComplementarOutros) {
+        this.exameComplementarOutros = exameComplementarOutros;
     }
 
     public Paciente getPaciente() {

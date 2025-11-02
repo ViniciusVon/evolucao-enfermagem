@@ -24,4 +24,36 @@ public class ExameComplementarEletrolitos extends BaseEntity {
     @MapsId
     @JoinColumn(name = "id")
     private ExameComplementar exameComplementar;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public BigDecimal getNa() {
+        return na;
+    }
+
+    public void setNa(BigDecimal na) {
+        this.na = na;
+    }
+
+    public BigDecimal getK() {
+        return k;
+    }
+
+    public void setK(BigDecimal k) {
+        this.k = k;
+    }
+
+    public ExameComplementar getExameComplementar() {
+        return exameComplementar;
+    }
+
+    public void setExameComplementar(ExameComplementar exameComplementar) {
+        this.exameComplementar = exameComplementar;
+    }
 }
