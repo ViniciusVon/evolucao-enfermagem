@@ -2,8 +2,11 @@ package com.pm.evolucaoenfermagem.service;
 
 import com.pm.evolucaoenfermagem.dto.cefalocaudal.CefalocaudalRequestDTO;
 import com.pm.evolucaoenfermagem.dto.cefalocaudal.CefalocaudalResponseDTO;
+import com.pm.evolucaoenfermagem.dto.dispositivo.DispositivoResponseDTO;
 import com.pm.evolucaoenfermagem.mapper.CefalocaudalMapper;
+import com.pm.evolucaoenfermagem.mapper.DispositivoMapper;
 import com.pm.evolucaoenfermagem.model.Cefalocaudal;
+import com.pm.evolucaoenfermagem.model.Dispositivo;
 import com.pm.evolucaoenfermagem.model.Paciente;
 import com.pm.evolucaoenfermagem.repository.CefalocaudalRepository;
 import com.pm.evolucaoenfermagem.repository.PacienteRepository;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class CefalocaudalService {
@@ -35,6 +39,18 @@ public class CefalocaudalService {
         Cefalocaudal cefalocaudal = cefalocaudalRepository.findById(id)
                 .orElseThrow(() -> new CefalocaudalNaoEncontradoException("Cefalocaudal não encontrando com o ID: " + id));
         return CefalocaudalMapper.toDto(cefalocaudal);
+    }
+
+    public List<CefalocaudalResponseDTO> buscarPorPacienteId(UUID pacienteId) {
+        Paciente paciente = pacienteRepository.findById(pacienteId)
+                .orElseThrow(() -> new PacienteNaoEncontradoException(
+                        "Paciente não encontrado com o ID: " + pacienteId));
+
+        List<Cefalocaudal> cefalocaudais = cefalocaudalRepository.findByPacienteId(pacienteId);
+
+        return cefalocaudais.stream()
+                .map(CefalocaudalMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public CefalocaudalResponseDTO criar(CefalocaudalRequestDTO dto) {

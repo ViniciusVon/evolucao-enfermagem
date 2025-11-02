@@ -1,8 +1,11 @@
 package com.pm.evolucaoenfermagem.service;
 
+import com.pm.evolucaoenfermagem.dto.evolucaoEnfermagem.EvolucaoEnfermagemResponseDTO;
 import com.pm.evolucaoenfermagem.dto.exameComplementar.ExameComplementarRequestDTO;
 import com.pm.evolucaoenfermagem.dto.exameComplementar.ExameComplementarResponseDTO;
+import com.pm.evolucaoenfermagem.mapper.EvolucaoEnfermagemMapper;
 import com.pm.evolucaoenfermagem.mapper.ExameComplementarMapper;
+import com.pm.evolucaoenfermagem.model.EvolucaoEnfermagem;
 import com.pm.evolucaoenfermagem.model.ExameComplementar;
 import com.pm.evolucaoenfermagem.model.Paciente;
 import com.pm.evolucaoenfermagem.repository.ExameComplementarRepository;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ExameComplementarService {
@@ -36,6 +40,18 @@ public class ExameComplementarService {
         ExameComplementar exameComplementar = exameComplementarRepository.findById(id)
                 .orElseThrow(() -> new ExameComplementarNaoEncontradoException("Exame complementar não encontrado com o ID: " + id));
         return ExameComplementarMapper.toDto(exameComplementar);
+    }
+
+    public List<ExameComplementarResponseDTO> buscarPorPacienteId(UUID pacienteId) {
+        Paciente paciente = pacienteRepository.findById(pacienteId)
+                .orElseThrow(() -> new PacienteNaoEncontradoException(
+                        "Paciente não encontrado com o ID: " + pacienteId));
+
+        List<ExameComplementar> exames = exameComplementarRepository.findByPacienteId(pacienteId);
+
+        return exames.stream()
+                .map(ExameComplementarMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public ExameComplementarResponseDTO criar(ExameComplementarRequestDTO dto) {

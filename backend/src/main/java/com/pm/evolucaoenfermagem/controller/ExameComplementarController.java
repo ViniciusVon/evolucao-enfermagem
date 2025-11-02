@@ -1,5 +1,6 @@
 package com.pm.evolucaoenfermagem.controller;
 
+import com.pm.evolucaoenfermagem.dto.evolucaoEnfermagem.EvolucaoEnfermagemResponseDTO;
 import com.pm.evolucaoenfermagem.dto.exameComplementar.ExameComplementarRequestDTO;
 import com.pm.evolucaoenfermagem.dto.exameComplementar.ExameComplementarResponseDTO;
 import com.pm.evolucaoenfermagem.service.ExameComplementarService;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/pacientes/exame-complementar")
+@RequestMapping("/exame-complementar")
 @Tag(name = "Exame Complementar", description = "API para gerenciar exames complementares")
 public class ExameComplementarController {
 
@@ -32,6 +33,12 @@ public class ExameComplementarController {
     @Operation(summary = "Buscar exame complementar por Id")
     public ResponseEntity<ExameComplementarResponseDTO> buscarPorId(@PathVariable UUID id) {
         return ResponseEntity.ok(exameComplementarService.buscarPorId(id));
+    }
+
+    @GetMapping("/paciente/{pacienteId}")
+    @Operation(summary = "Buscar exames complementares por paciente ID")
+    public ResponseEntity<List<ExameComplementarResponseDTO>> buscarPorPacienteId(@PathVariable UUID pacienteId) {
+        return ResponseEntity.ok(exameComplementarService.buscarPorPacienteId(pacienteId));
     }
 
     @PostMapping

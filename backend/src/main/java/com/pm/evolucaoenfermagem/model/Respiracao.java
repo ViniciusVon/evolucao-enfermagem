@@ -26,10 +26,6 @@ public class Respiracao extends BaseEntity {
     @JoinColumn(name = "evolucao_enfermagem_id", referencedColumnName = "id", nullable = false)
     private EvolucaoEnfermagem evolucaoEnfermagem;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "paciente_id", nullable = false)
-    private Paciente paciente;
-
     public UUID getId() {
         return id;
     }
@@ -84,13 +80,5 @@ public class Respiracao extends BaseEntity {
 
     public void setEvolucaoEnfermagem(EvolucaoEnfermagem evolucaoEnfermagem) {
         this.evolucaoEnfermagem = evolucaoEnfermagem;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
     }
 }

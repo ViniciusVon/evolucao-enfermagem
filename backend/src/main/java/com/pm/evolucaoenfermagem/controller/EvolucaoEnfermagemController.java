@@ -1,5 +1,6 @@
 package com.pm.evolucaoenfermagem.controller;
 
+import com.pm.evolucaoenfermagem.dto.cefalocaudal.CefalocaudalResponseDTO;
 import com.pm.evolucaoenfermagem.dto.evolucaoEnfermagem.EvolucaoEnfermagemRequestDTO;
 import com.pm.evolucaoenfermagem.dto.evolucaoEnfermagem.EvolucaoEnfermagemResponseDTO;
 import com.pm.evolucaoenfermagem.service.EvolucaoEnfermagemService;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/pacientes/evolucao-enfermagem")
+@RequestMapping("/evolucao-enfermagem")
 @Tag(name = "Evolução Enfermagem", description = "API para gerenciar Evoluções de Enfermagem")
 public class EvolucaoEnfermagemController {
     public final EvolucaoEnfermagemService evolucaoEnfermagemService;
@@ -31,6 +32,12 @@ public class EvolucaoEnfermagemController {
     @Operation(summary = "Buscar evolução de enfermagem por Id")
     public ResponseEntity<EvolucaoEnfermagemResponseDTO> buscarPorId(@PathVariable UUID id) {
         return ResponseEntity.ok(evolucaoEnfermagemService.buscarPorId(id));
+    }
+
+    @GetMapping("/paciente/{pacienteId}")
+    @Operation(summary = "Buscar evoluções por paciente ID")
+    public ResponseEntity<List<EvolucaoEnfermagemResponseDTO>> buscarPorPacienteId(@PathVariable UUID pacienteId) {
+        return ResponseEntity.ok(evolucaoEnfermagemService.buscarPorPacienteId(pacienteId));
     }
 
     @PostMapping

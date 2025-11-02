@@ -1,5 +1,6 @@
 package com.pm.evolucaoenfermagem.controller;
 
+import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoResponseDTO;
 import com.pm.evolucaoenfermagem.dto.hpp.HppRequestDTO;
 import com.pm.evolucaoenfermagem.dto.hpp.HppResponseDTO;
 import com.pm.evolucaoenfermagem.service.HppService;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/pacientes/hpp")
+@RequestMapping("/hpp")
 @Tag(name = "HPP", description = "API para gerenciar o História de Patológica Pregressa (HPP)")
 public class HppController {
 
@@ -34,6 +35,12 @@ public class HppController {
     public ResponseEntity<HppResponseDTO> getPorId(@PathVariable UUID id) {
         HppResponseDTO hpp = hppService.buscarPorId(id);
         return ResponseEntity.ok(hpp);
+    }
+
+    @GetMapping("/paciente/{pacienteId}")
+    @Operation(summary = "Buscar hpps por paciente ID")
+    public ResponseEntity<List<HppResponseDTO>> buscarPorPacienteId(@PathVariable UUID pacienteId) {
+        return ResponseEntity.ok(hppService.buscarPorPacienteId(pacienteId));
     }
 
     @PostMapping

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/pacientes/dispositivos")
+@RequestMapping("/dispositivos")
 @Tag(name = "Dispositivos", description = "API para gerenciar dispositivos médicos instalados em pacientes")
 public class DispositivoController {
 
@@ -32,6 +32,12 @@ public class DispositivoController {
     @Operation(summary = "Buscar dispositivo por ID")
     public ResponseEntity<DispositivoResponseDTO> buscarPorId(@PathVariable UUID id) {
         return ResponseEntity.ok(dispositivoService.buscarPorId(id));
+    }
+
+    @GetMapping("/paciente/{pacienteId}")
+    @Operation(summary = "Buscar dispositivos por paciente ID")
+    public ResponseEntity<List<DispositivoResponseDTO>> buscarPorPacienteId(@PathVariable UUID pacienteId) {
+        return ResponseEntity.ok(dispositivoService.buscarPorPacienteId(pacienteId));
     }
 
     @PostMapping

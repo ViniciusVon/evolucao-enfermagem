@@ -1,8 +1,11 @@
 package com.pm.evolucaoenfermagem.service;
 
+import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoResponseDTO;
 import com.pm.evolucaoenfermagem.dto.hpp.HppRequestDTO;
 import com.pm.evolucaoenfermagem.dto.hpp.HppResponseDTO;
+import com.pm.evolucaoenfermagem.mapper.ExameFisicoMapper;
 import com.pm.evolucaoenfermagem.mapper.HppMapper;
+import com.pm.evolucaoenfermagem.model.ExameFisico;
 import com.pm.evolucaoenfermagem.model.Hpp;
 import com.pm.evolucaoenfermagem.model.Paciente;
 import com.pm.evolucaoenfermagem.repository.HppRepository;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class HppService {
@@ -36,6 +40,18 @@ public class HppService {
         Hpp hpp = hppRepository.findById(id)
                 .orElseThrow(() -> new HppNaoEncontradoException("HPP não encontrado com o ID: " + id));
         return HppMapper.toDto(hpp);
+    }
+
+    public List<HppResponseDTO> buscarPorPacienteId(UUID pacienteId) {
+        Paciente paciente = pacienteRepository.findById(pacienteId)
+                .orElseThrow(() -> new PacienteNaoEncontradoException(
+                        "Paciente não encontrado com o ID: " + pacienteId));
+
+        List<Hpp> hpps = hppRepository.findByPacienteId(pacienteId);
+
+        return hpps.stream()
+                .map(HppMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public HppResponseDTO criar(HppRequestDTO dto) {

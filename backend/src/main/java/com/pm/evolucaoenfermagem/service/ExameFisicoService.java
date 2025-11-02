@@ -1,7 +1,9 @@
 package com.pm.evolucaoenfermagem.service;
 
+import com.pm.evolucaoenfermagem.dto.exameComplementar.ExameComplementarResponseDTO;
 import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoRequestDTO;
 import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoResponseDTO;
+import com.pm.evolucaoenfermagem.mapper.ExameComplementarMapper;
 import com.pm.evolucaoenfermagem.mapper.ExameFisicoMapper;
 import com.pm.evolucaoenfermagem.model.*;
 import com.pm.evolucaoenfermagem.repository.*;
@@ -51,6 +53,19 @@ public class ExameFisicoService {
     public List<ExameFisicoResponseDTO> BuscarTodos() {
         return exameFisicoRepository.findAll()
                 .stream()
+                .map(ExameFisicoMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ExameFisicoResponseDTO> buscarPorPacienteId(UUID pacienteId) {
+        Paciente paciente = pacienteRepository.findById(pacienteId)
+                .orElseThrow(() -> new PacienteNaoEncontradoException(
+                        "Paciente não encontrado com o ID: " + pacienteId));
+
+        List<ExameFisico> exames = exameFisicoRepository.findByPacienteId(pacienteId);
+
+        return exames.stream()
                 .map(ExameFisicoMapper::toDto)
                 .collect(Collectors.toList());
     }

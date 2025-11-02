@@ -2,6 +2,7 @@ package com.pm.evolucaoenfermagem.mapper;
 
 import com.pm.evolucaoenfermagem.dto.respiracao.RespiracaoRequestDTO;
 import com.pm.evolucaoenfermagem.dto.respiracao.RespiracaoResponseDTO;
+import com.pm.evolucaoenfermagem.model.EvolucaoEnfermagem;
 import com.pm.evolucaoenfermagem.model.Respiracao;
 
 import java.time.LocalDateTime;
@@ -16,11 +17,12 @@ public class RespiracaoMapper {
         dto.setCn(respiracao.getCn());
         dto.setLitros(respiracao.getLitros());
         dto.setOutro(respiracao.getOutro());
+        dto.setEvolucaoEnfermagemId(respiracao.getEvolucaoEnfermagem().getId());
 
         return dto;
     }
 
-    public static Respiracao toEntity(RespiracaoRequestDTO dto) {
+    public static Respiracao toEntity(RespiracaoRequestDTO dto, EvolucaoEnfermagem evolucaoEnfermagem) {
         Respiracao respiracao = new Respiracao();
 
         respiracao.setAa(dto.getAa());
@@ -28,6 +30,7 @@ public class RespiracaoMapper {
         respiracao.setCn(dto.getCn());
         respiracao.setLitros(dto.getLitros());
         respiracao.setOutro(dto.getOutro());
+        respiracao.setEvolucaoEnfermagem(evolucaoEnfermagem);
         respiracao.setCreatedAt(LocalDateTime.now());
         respiracao.setUpdatedAt(null);
         respiracao.setDeletedAt(null);

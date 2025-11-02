@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class DispositivoService {
@@ -35,6 +36,18 @@ public class DispositivoService {
         Dispositivo dispositivo = dispositivoRepository.findById(id)
                 .orElseThrow(() -> new DispositivoNaoEncontradoException("Dispositivo não encontrado com o ID: " + id));
         return DispositivoMapper.toDto(dispositivo);
+    }
+
+    public List<DispositivoResponseDTO> buscarPorPacienteId(UUID pacienteId) {
+        Paciente paciente = pacienteRepository.findById(pacienteId)
+                .orElseThrow(() -> new PacienteNaoEncontradoException(
+                        "Paciente não encontrado com o ID: " + pacienteId));
+
+        List<Dispositivo> dispositivos = dispositivoRepository.findByPacienteId(pacienteId);
+
+        return dispositivos.stream()
+                .map(DispositivoMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     public DispositivoResponseDTO criar(DispositivoRequestDTO dto) {

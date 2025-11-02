@@ -1,8 +1,10 @@
 package com.pm.evolucaoenfermagem.controller;
 
+import com.pm.evolucaoenfermagem.dto.exameComplementar.ExameComplementarResponseDTO;
 import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoRequestDTO;
 import com.pm.evolucaoenfermagem.dto.exameFisico.ExameFisicoResponseDTO;
 import com.pm.evolucaoenfermagem.service.ExameFisicoService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("pacientes/exame-fisico")
+@RequestMapping("/exame-fisico")
 @Tag(name = "Exame Fisico", description = "API para gerenciar exames físicos")
 public class ExameFisicoController {
 
@@ -19,12 +21,6 @@ public class ExameFisicoController {
 
     public ExameFisicoController(ExameFisicoService exameFisicoService) {
         this.exameFisicoService = exameFisicoService;
-    }
-
-    @PostMapping
-    public ResponseEntity<ExameFisicoResponseDTO> create(@RequestBody ExameFisicoRequestDTO dto) {
-        ExameFisicoResponseDTO response = exameFisicoService.create(dto);
-        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
@@ -36,6 +32,18 @@ public class ExameFisicoController {
     @GetMapping
     public ResponseEntity<List<ExameFisicoResponseDTO>> getAll() {
         List<ExameFisicoResponseDTO> response = exameFisicoService.BuscarTodos();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/paciente/{pacienteId}")
+    @Operation(summary = "Buscar exames fisicos por paciente ID")
+    public ResponseEntity<List<ExameFisicoResponseDTO>> buscarPorPacienteId(@PathVariable UUID pacienteId) {
+        return ResponseEntity.ok(exameFisicoService.buscarPorPacienteId(pacienteId));
+    }
+
+    @PostMapping
+    public ResponseEntity<ExameFisicoResponseDTO> create(@RequestBody ExameFisicoRequestDTO dto) {
+        ExameFisicoResponseDTO response = exameFisicoService.create(dto);
         return ResponseEntity.ok(response);
     }
 

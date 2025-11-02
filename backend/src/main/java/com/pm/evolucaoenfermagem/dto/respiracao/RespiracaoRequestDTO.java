@@ -1,5 +1,7 @@
 package com.pm.evolucaoenfermagem.dto.respiracao;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -10,6 +12,9 @@ public class RespiracaoRequestDTO {
     private BigDecimal litros;
 
     private String outro;
+
+    @NotNull
+    private UUID evolucaoEnfermagemId;
 
     public Boolean getAa() {
         return aa;
@@ -49,5 +54,13 @@ public class RespiracaoRequestDTO {
 
     public void setOutro(String outro) {
         this.outro = outro;
+    }
+
+    public @NotNull UUID getEvolucaoEnfermagemId() {
+        return evolucaoEnfermagemId;
+    }
+
+    public void setEvolucaoEnfermagemId(UUID evolucaoEnfermagemId) {
+        this.evolucaoEnfermagemId = evolucaoEnfermagemId;
     }
 }

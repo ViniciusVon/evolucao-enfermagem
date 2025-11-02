@@ -2,6 +2,7 @@ package com.pm.evolucaoenfermagem.controller;
 
 import com.pm.evolucaoenfermagem.dto.cefalocaudal.CefalocaudalRequestDTO;
 import com.pm.evolucaoenfermagem.dto.cefalocaudal.CefalocaudalResponseDTO;
+import com.pm.evolucaoenfermagem.dto.dispositivo.DispositivoResponseDTO;
 import com.pm.evolucaoenfermagem.service.CefalocaudalService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("pacientes/cefalocaudal")
+@RequestMapping("/cefalocaudal")
 @Tag(name = "Cefalocaudal", description = "API para gerenciar Cefalocaudal")
 public class CefalocaudalController {
     private final CefalocaudalService cefalocaudalService;
@@ -31,6 +32,12 @@ public class CefalocaudalController {
     @Operation(summary = "Buscar cefalocaudal por Id")
     public ResponseEntity<CefalocaudalResponseDTO> buscarPorId(@PathVariable UUID id) {
         return ResponseEntity.ok(cefalocaudalService.buscarPorId(id));
+    }
+
+    @GetMapping("/paciente/{pacienteId}")
+    @Operation(summary = "Buscar cefalocaudais por paciente ID")
+    public ResponseEntity<List<CefalocaudalResponseDTO>> buscarPorPacienteId(@PathVariable UUID pacienteId) {
+        return ResponseEntity.ok(cefalocaudalService.buscarPorPacienteId(pacienteId));
     }
 
     @PostMapping
