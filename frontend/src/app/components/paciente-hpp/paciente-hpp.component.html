@@ -1,0 +1,49 @@
+<p-card [header]="'HPP'" class="w-full max-w-md m-auto shadow-3" *ngIf="hpp && hpp.length > 0; else semDados">
+    <div *ngFor="let item of hpp" class="p-fluid mb-4 border-bottom pb-4">
+        <div class="field">
+            <label>Paciente:</label>
+            <span>{{ item.pacienteNome }} (ID: {{ item.pacienteId }})</span>
+        </div>
+
+        <div class="field">
+            <label>Medicamentos Uso Continuo:</label>
+            <span>{{ item.medicamentosUsoContinuo }}</span>
+        </div>
+
+        <div class="field">
+            <label>Outras Comorbidades:</label>
+            <span>{{ item.outrasComorbidades }}</span>
+        </div>
+
+        <p-divider></p-divider>
+
+        <div class="field flex flex-wrap gap-2">
+            <p-tag *ngIf="item.has" severity="success" value="Has"></p-tag>
+            <p-tag *ngIf="!item.has" severity="warn" value="Não Has"></p-tag>
+
+            <p-tag *ngIf="item.dm" severity="info" value="DM"></p-tag>
+            <p-tag *ngIf="!item.dm" severity="danger" value="Sem DM"></p-tag>
+
+            <p-tag *ngIf="item.dopc" severity="success" value="DOPC"></p-tag>
+            <p-tag *ngIf="!item.dopc" severity="warn" value="Não DOPC"></p-tag>
+
+            <p-tag *ngIf="item.icc" severity="success" value="ICC"></p-tag>
+            <p-tag *ngIf="!item.icc" severity="warn" value="Não ICC"></p-tag>
+
+            <p-tag *ngIf="item.dac" severity="success" value="DAC"></p-tag>
+            <p-tag *ngIf="!item.dac" severity="warn" value="Não DAC"></p-tag>
+
+            <p-tag *ngIf="item.ave" severity="success" value="AVE"></p-tag>
+            <p-tag *ngIf="!item.ave" severity="warn" value="Não AVE"></p-tag>
+
+            <p-tag *ngIf="item.alergico" severity="success" value="Alérgico"></p-tag>
+            <p-tag *ngIf="!item.alergico" severity="warn" value="Não Alérgico"></p-tag>
+        </div>
+
+        <p-divider></p-divider>
+    </div>
+</p-card>
+
+<ng-template #semDados>
+    <p class="text-center text-600">Nenhum registro de HPP encontrado para este paciente.</p>
+</ng-template>
