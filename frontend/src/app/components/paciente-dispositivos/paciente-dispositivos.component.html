@@ -1,0 +1,75 @@
+<div *ngFor="let dispositivo of dispositivos" class="mb-3">
+
+    <p-card [header]="'Dispositivo: ' + dispositivo.tipoDispositivoEnum" class="w-full max-w-md m-auto shadow-3">
+            <div class="p-fluid">
+                    <div class="field">
+                            <label>Paciente:</label>
+                            <span>{{ dispositivo.pacienteNome }} (ID: {{ dispositivo.pacienteId }})</span>
+                        </div>
+
+                    <div class="field">
+                            <label>Local:</label>
+                            <span>{{ dispositivo.local }}</span>
+                        </div>
+
+                    <div class="field">
+                            <label>Curativo:</label>
+                            <span>{{ dispositivo.curativo }}</span>
+                        </div>
+
+                    <div class="field">
+                            <label>Data de Instalação:</label>
+                            <span>{{ dispositivo.dataInstalacao | date:'dd/MM/yyyy' }}</span>
+                        </div>
+
+                    <p-divider></p-divider>
+
+                    <div class="field flex flex-wrap gap-2">
+                            <p-tag *ngIf="dispositivo.isUtilizado" severity="success" value="Utilizado"></p-tag>
+                            <p-tag *ngIf="!dispositivo.isUtilizado" severity="warn" value="Não utilizado"></p-tag>
+
+                            <p-tag *ngIf="dispositivo.isAbertaDrenagem" severity="info" value="Aberta Drenagem"></p-tag>
+                            <p-tag *ngIf="!dispositivo.isAbertaDrenagem" severity="danger" value="Sem Drenagem"></p-tag>
+
+                            <p-tag *ngIf="dispositivo.isEmUso" severity="success" value="Em uso"></p-tag>
+                            <p-tag *ngIf="!dispositivo.isEmUso" severity="warn" value="Não em uso"></p-tag>
+                        </div>
+
+                    <p-divider></p-divider>
+
+                    <div class="field grid">
+                            <div class="col-6">
+                                    <label>Calibre:</label>
+                                    <span>{{ dispositivo.calibre }}</span>
+                                </div>
+                            <div class="col-6">
+                                    <label>Modo:</label>
+                                    <span>{{ dispositivo.modo }}</span>
+                                </div>
+                            <div class="col-6">
+                                    <label>VC:</label>
+                                    <span>{{ dispositivo.vc }}</span>
+                                </div>
+                            <div class="col-6">
+                                    <label>PEEP:</label>
+                                    <span>{{ dispositivo.peep }}</span>
+                                </div>
+                            <div class="col-6">
+                                    <label>FR:</label>
+                                    <span>{{ dispositivo.fr }}</span>
+                                </div>
+                            <div class="col-6">
+                                    <label>FiO2:</label>
+                                    <span>{{ dispositivo.fiO2 }}</span>
+                                </div>
+                        </div>
+                </div>
+    </p-card>
+
+</div>
+
+<div *ngIf="dispositivos.length === 0">
+    <p-card class="w-full max-w-md m-auto shadow-3">
+        <p class="text-center">Nenhum dispositivo encontrado para este paciente.</p>
+    </p-card>
+</div>
