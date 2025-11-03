@@ -1,14 +1,8 @@
 <div class="paciente-container">
         <div class="paciente-container-left">
                 <app-paciente-list (pacienteSelecionado)="onPacienteSelecionado($event)"></app-paciente-list>
-            </div>
-
-        <app-paciente-dispositivos [pacienteId]="pacienteSelecionadoId">
-    </app-paciente-dispositivos>
-
-        <app-paciente-hpp [pacienteId]="pacienteSelecionadoId">
-    </app-paciente-hpp>
-    <app-paciente-evolucao-enfermagem [pacienteId]="pacienteSelecionadoId">
-
-    </app-paciente-evolucao-enfermagem>
+    </div>
+    <div class="paciente-container-right">
+        <app-paciente-tabs [pacienteId]="pacienteSelecionadoId"></app-paciente-tabs>
+    </div>
 </div>
