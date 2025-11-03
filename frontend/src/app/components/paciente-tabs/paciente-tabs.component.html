@@ -1,0 +1,30 @@
+<p-tabs>
+    <p-tablist>
+        <p-tab value="0">HPP</p-tab>
+        <p-tab value="1">Dispositivos</p-tab>
+        <p-tab value="2">Evolução Enfermagem</p-tab>
+        <p-tab value="3">Cefalocaudal</p-tab>
+        <p-tab value="4">Exame Físico</p-tab>
+        <p-tab value="5">Exame Complementar</p-tab>
+    </p-tablist>
+    <p-tabpanels>
+        <p-tabpanel value="0">
+            <app-paciente-hpp [pacienteId]="pacienteId"></app-paciente-hpp>
+        </p-tabpanel>
+        <p-tabpanel value="1">
+            <app-paciente-dispositivos [pacienteId]="pacienteId"></app-paciente-dispositivos>
+        </p-tabpanel>
+        <p-tabpanel value="2">
+            <app-paciente-evolucao-enfermagem [pacienteId]="pacienteId"></app-paciente-evolucao-enfermagem>
+        </p-tabpanel>
+        <p-tabpanel value="3">
+            <app-paciente-cefalocaudal [pacienteId]="pacienteId"></app-paciente-cefalocaudal>
+        </p-tabpanel>
+        <p-tabpanel value="4">
+            <app-paciente-exame-fisico [pacienteId]="pacienteId"></app-paciente-exame-fisico>
+        </p-tabpanel>
+        <p-tabpanel value="5">
+            <app-paciente-exame-complementar [pacienteId]="pacienteId"></app-paciente-exame-complementar>
+        </p-tabpanel>
+    </p-tabpanels>
+</p-tabs>
