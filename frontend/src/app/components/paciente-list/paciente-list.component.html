@@ -1,35 +1,95 @@
-<p-card header="Pacientes Lista" class="shadow-3 w-full max-w-xs md:max-w-md m-auto mt-4">
-    <div class="flex flex-column gap-3">
-        <p-floatlabel variant="on">
-            <input pInputText type="text" id="on_label" [(ngModel)]="searchText" autocomplete="on" />
-            <label for="on_label">Buscar paciente...</label>
-        </p-floatlabel>
+<div class="med-page">
 
-        <p-divider></p-divider>
-
-        <p-listbox [options]="filtrarPacientes()" optionLabel="nome" class="w-full"
-            [listStyle]="{ 'max-height': '400px' }" (onChange)="selecionar($event.value)">
-
-            <ng-template let-p pTemplate="item">
-                <div class="flex flex-row align-items-center gap-3 p-2 w-full">
-
-                    <p-avatar icon="pi pi-user" shape="circle" size="large"></p-avatar>
-
-                    <div class="flex flex-column">
-                        <span class="font-semibold text-900">{{ p.nome }}</span>
-                        <small class="text-600 mt-1">{{ p.peso }}</small>
-                        <small class="text-600">{{ p.ses }}</small>
-                        <p-tag [value]="getStatusLabel(p.status)" class="mt-1"></p-tag>
-                    </div>
-
-                </div>
-            </ng-template>
-
-        </p-listbox>
-
-        <p-divider></p-divider>
-
-        <button pButton type="button" icon="pi pi-refresh" label="Recarregar" class="p-button-sm"
-            (click)="loadPacientes()"></button>
+  <!-- TOP BAR -->
+  <div class="med-topbar">
+    <div>
+      <div class="topbar-title">BrubyEnfermagem</div>
+      <div class="topbar-sub">Selecione um paciente</div>
     </div>
-</p-card>
+    <div class="topbar-btn" (click)="loadPacientes()">
+      <i class="pi pi-refresh"></i>
+    </div>
+  </div>
+
+  <!-- BUSCA -->
+  <p-iconfield style="width:100%;">
+    <p-inputicon styleClass="pi pi-search"/>
+    <input
+      pInputText
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Buscar por nome ou SES..."
+      style="width:100%; font-size:14px; border-radius:12px; padding: 12px 12px 12px 38px;"/>
+  </p-iconfield>
+
+  <!-- CONTADOR -->
+  <div style="font-size:11px; font-weight:600; color:var(--p-text-muted-color);
+              text-transform:uppercase; letter-spacing:0.07em; padding: 2px 2px;">
+    {{ filtrarPacientes().length }} paciente(s) encontrado(s)
+  </div>
+
+  <!-- LISTA -->
+  <div style="display:flex; flex-direction:column; gap:7px;">
+
+    <div
+      *ngFor="let p of filtrarPacientes()"
+      class="med-patient-item"
+      [class.active]="pacienteAtivo?.id === p.id"
+      (click)="selecionar(p)">
+
+      <!-- Avatar com inicial -->
+      <p-avatar
+        [label]="getInitials(p.nome)"
+        shape="circle"
+        size="normal"
+        [style]="{
+          'background': 'var(--p-primary-100)',
+          'color': 'var(--p-primary-700)',
+          'font-weight': '600',
+          'width': '42px',
+          'height': '42px',
+          'font-size': '14px',
+          'flex-shrink': '0'
+        }">
+      </p-avatar>
+
+      <!-- Dados -->
+      <div style="flex:1; min-width:0;">
+        <div class="item-name">{{ p.nome }}</div>
+        <div class="item-meta">
+          <i class="pi pi-id-card" style="font-size:10px; margin-right:3px;"></i>SES {{ p.ses }}
+          &nbsp;·&nbsp;{{ p.idade }} anos
+          &nbsp;·&nbsp;{{ p.peso }} kg
+        </div>
+      </div>
+
+      <!-- Status + chevron -->
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:5px; flex-shrink:0;">
+        <p-tag
+          [value]="getStatusLabel(p.status)"
+          [severity]="getStatusSeverity(p.status)"
+          [style]="{'font-size':'11px'}">
+        </p-tag>
+        <i class="pi pi-chevron-right"
+          style="font-size:11px; color:var(--p-text-muted-color); opacity:0.5;"></i>
+      </div>
+
+    </div>
+
+    <!-- ESTADO VAZIO -->
+    <div *ngIf="filtrarPacientes().length === 0" class="med-empty">
+      <span class="med-empty-title">Nenhum resultado encontrado</span>
+      <span class="med-empty-sub">Tente buscar por outro nome ou SES</span>
+      <button
+        pButton
+        size="small"
+        [outlined]="true"
+        label="Limpar busca"
+        icon="pi pi-times"
+        (click)="searchText = ''">
+      </button>
+    </div>
+
+  </div>
+
+</div>

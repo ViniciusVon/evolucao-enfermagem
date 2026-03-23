@@ -1,75 +1,65 @@
-<div *ngFor="let dispositivo of dispositivos" class="mb-3">
+<div *ngIf="dispositivos.length > 0; else semDados"
+  style="display:flex;flex-direction:column;gap:10px;">
 
-    <p-card [header]="'Dispositivo: ' + dispositivo.tipoDispositivoEnum" class="w-full max-w-md m-auto shadow-3">
-            <div class="p-fluid">
-                    <div class="field">
-                            <label>Paciente:</label>
-                            <span>{{ dispositivo.pacienteNome }} (ID: {{ dispositivo.pacienteId }})</span>
-                        </div>
+  <div *ngFor="let d of dispositivos" class="med-card">
 
-                    <div class="field">
-                            <label>Local:</label>
-                            <span>{{ dispositivo.local }}</span>
-                        </div>
+    <div class="med-card-header">
+      <div class="med-header-text">
+        <h3>{{ d.tipoDispositivoEnum }}</h3>
+        <p>{{ d.pacienteNome }} · {{ d.dataInstalacao | date:'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
 
-                    <div class="field">
-                            <label>Curativo:</label>
-                            <span>{{ dispositivo.curativo }}</span>
-                        </div>
+    <div class="med-card-body">
 
-                    <div class="field">
-                            <label>Data de Instalação:</label>
-                            <span>{{ dispositivo.dataInstalacao | date:'dd/MM/yyyy' }}</span>
-                        </div>
+      <div class="med-field">
+        <span class="med-label">Local</span>
+        <span class="med-value">{{ d.local || '—' }}</span>
+      </div>
 
-                    <p-divider></p-divider>
+      <div class="med-field">
+        <span class="med-label">Curativo</span>
+        <span class="med-value">{{ d.curativo || '—' }}</span>
+      </div>
 
-                    <div class="field flex flex-wrap gap-2">
-                            <p-tag *ngIf="dispositivo.isUtilizado" severity="success" value="Utilizado"></p-tag>
-                            <p-tag *ngIf="!dispositivo.isUtilizado" severity="warn" value="Não utilizado"></p-tag>
+      <div class="med-section-label">Status</div>
+      <div class="med-tags">
+        <p-tag *ngIf="d.isUtilizado"       severity="success" value="Utilizado"></p-tag>
+        <p-tag *ngIf="!d.isUtilizado"      severity="warn"    value="Não utilizado"></p-tag>
+        <p-tag *ngIf="d.isAbertaDrenagem"  severity="info"    value="Aberta drenagem"></p-tag>
+        <p-tag *ngIf="!d.isAbertaDrenagem" severity="danger"  value="Sem drenagem"></p-tag>
+        <p-tag *ngIf="d.isEmUso"           severity="success" value="Em uso"></p-tag>
+        <p-tag *ngIf="!d.isEmUso"          severity="warn"    value="Não em uso"></p-tag>
+      </div>
 
-                            <p-tag *ngIf="dispositivo.isAbertaDrenagem" severity="info" value="Aberta Drenagem"></p-tag>
-                            <p-tag *ngIf="!dispositivo.isAbertaDrenagem" severity="danger" value="Sem Drenagem"></p-tag>
+      <!-- Parâmetros ventilatórios em grid -->
+      <div class="med-section-label">Parâmetros</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;
+                  background:var(--p-content-border-color);">
+        @for (campo of [
+          { label: 'Calibre', valor: d.calibre },
+          { label: 'Modo',    valor: d.modo },
+          { label: 'VC',      valor: d.vc },
+          { label: 'PEEP',    valor: d.peep },
+          { label: 'FR',      valor: d.fr },
+          { label: 'FiO₂',   valor: d.fiO2 }
+        ]; track campo.label) {
+          <div style="background:var(--p-card-background);
+                      padding:10px 14px;
+                      display:flex;flex-direction:column;gap:3px;">
+            <span class="med-label">{{ campo.label }}</span>
+            <span class="med-value">{{ campo.valor }}</span>
+          </div>
+        }
+      </div>
 
-                            <p-tag *ngIf="dispositivo.isEmUso" severity="success" value="Em uso"></p-tag>
-                            <p-tag *ngIf="!dispositivo.isEmUso" severity="warn" value="Não em uso"></p-tag>
-                        </div>
-
-                    <p-divider></p-divider>
-
-                    <div class="field grid">
-                            <div class="col-6">
-                                    <label>Calibre:</label>
-                                    <span>{{ dispositivo.calibre }}</span>
-                                </div>
-                            <div class="col-6">
-                                    <label>Modo:</label>
-                                    <span>{{ dispositivo.modo }}</span>
-                                </div>
-                            <div class="col-6">
-                                    <label>VC:</label>
-                                    <span>{{ dispositivo.vc }}</span>
-                                </div>
-                            <div class="col-6">
-                                    <label>PEEP:</label>
-                                    <span>{{ dispositivo.peep }}</span>
-                                </div>
-                            <div class="col-6">
-                                    <label>FR:</label>
-                                    <span>{{ dispositivo.fr }}</span>
-                                </div>
-                            <div class="col-6">
-                                    <label>FiO2:</label>
-                                    <span>{{ dispositivo.fiO2 }}</span>
-                                </div>
-                        </div>
-                </div>
-    </p-card>
-
+    </div>
+  </div>
 </div>
 
-<div *ngIf="dispositivos.length === 0">
-    <p-card class="w-full max-w-md m-auto shadow-3">
-        <p class="text-center">Nenhum dispositivo encontrado para este paciente.</p>
-    </p-card>
-</div>
+<ng-template #semDados>
+  <div class="med-empty">
+    <span class="med-empty-title">Sem dispositivos registrados</span>
+    <span class="med-empty-sub">Nenhum dispositivo encontrado para este paciente</span>
+  </div>
+</ng-template>

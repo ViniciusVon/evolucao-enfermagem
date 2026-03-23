@@ -18,7 +18,7 @@ export class PacienteService {
   }
 
   // GET - Buscar um paciente por ID
-  getPacienteById(id: number): Observable<Paciente> {
+  getPacienteById(id: string): Observable<Paciente> {
     return this.http.get<Paciente>(`${this.apiUrl}/${id}`);
   }
 
@@ -28,12 +28,12 @@ export class PacienteService {
   }
 
   // PUT - Atualizar paciente
-  updatePaciente(id: number, Paciente: Paciente): Observable<Paciente> {
+  updatePaciente(id: string, Paciente: Paciente): Observable<Paciente> {
     return this.http.put<Paciente>(`${this.apiUrl}/${id}`, Paciente);
   }
 
   // DELETE - Remover paciente
-  deletePaciente(id: number): Observable<void> {
+  deletePaciente(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

@@ -1,15 +1,64 @@
-.paciente-container {
-    display: flex;
-    height: 100vh;
+.med-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: #f0f4f8;
 }
 
-.paciente-container-left {
-    width: 300px;
-    border-right: 1px solid #ccc;
-    overflow-y: auto;
+.med-layout-list {
+  display: block;
+
+  &.has-selection {
+    display: none;
+  }
 }
 
-.paciente-container-right {
+.med-layout-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 24px;
+}
+
+.med-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 16px 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--p-primary-color);
+  cursor: pointer;
+  width: fit-content;
+
+  i { font-size: 13px; }
+
+  &:active { opacity: 0.7; }
+}
+
+@media (min-width: 768px) {
+  .med-layout {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .med-layout-list {
+    width: 340px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 16px;
+
+    &.has-selection { display: block; }
+  }
+
+  .med-layout-detail {
     flex: 1;
-    overflow-y: auto;
+    min-width: 0;
+  }
+
+  .med-back-btn { display: none; }
 }

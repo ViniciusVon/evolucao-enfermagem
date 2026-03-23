@@ -1,0 +1,76 @@
+<div class="med-page">
+
+  <!-- HERO -->
+  <div class="home-hero">
+    <div class="hero-greeting">{{ saudacao }} 👋</div>
+    <div class="hero-name">Bem-vindo, {{ nomeEstudante }}</div>
+    <div class="hero-badge">
+      <span class="hero-dot"></span>
+      Plantão ativo · UTI Adulto
+    </div>
+  </div>
+
+  <!-- ESTATÍSTICAS -->
+  <div class="med-section-label" style="padding:4px 2px;">Visão geral</div>
+
+  <div class="home-stats-row" *ngIf="!carregando; else loadingStats">
+    <div class="home-stat">
+      <div class="stat-val">{{ totalPacientes }}</div>
+      <div class="stat-lbl">Pacientes</div>
+    </div>
+    <div class="home-stat stat-danger">
+      <div class="stat-val">{{ totalCriticos }}</div>
+      <div class="stat-lbl">Em tratamento</div>
+    </div>
+    <div class="home-stat stat-success">
+      <div class="stat-val">{{ totalEstavel }}</div>
+      <div class="stat-lbl">Em recuperação</div>
+    </div>
+  </div>
+
+  <ng-template #loadingStats>
+    <div class="home-stats-row">
+      <div class="home-stat skeleton" *ngFor="let i of [1,2,3]">
+        <div class="stat-val">—</div>
+        <div class="stat-lbl">Carregando</div>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- ACESSO RÁPIDO -->
+  <div class="med-section-label" style="padding:4px 2px;">Acesso rápido</div>
+  <div class="home-quick-grid">
+
+    <div class="home-quick-card" routerLink="/paciente">
+      <div class="quick-label">Pacientes</div>
+      <div class="quick-sub">Lista completa</div>
+    </div>
+
+    <div class="home-quick-card" routerLink="/paciente">
+      <div class="quick-label">Exames</div>
+      <div class="quick-sub">Complementares</div>
+    </div>
+
+    <div class="home-quick-card" routerLink="/paciente">
+      <div class="quick-label">Exame Físico</div>
+      <div class="quick-sub">Registros</div>
+    </div>
+
+    <div class="home-quick-card" routerLink="/paciente">
+      <div class="quick-label">Evoluções</div>
+      <div class="quick-sub">Enfermagem</div>
+    </div>
+
+  </div>
+
+  <!-- PLANTÃO -->
+  <div class="med-section-label" style="padding:4px 2px;">Plantão atual</div>
+  <div class="home-plantar-card">
+    <div>
+      <div class="plantar-title">Turno da manhã</div>
+      <div class="plantar-sub">06:00 — 12:00 · UTI Adulto</div>
+    </div>
+    <span class="plantar-badge">Ativo</span>
+  </div>
+
+</div>

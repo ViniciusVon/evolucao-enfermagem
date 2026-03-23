@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { getInitials, getStatusLabel, getStatusSeverity } from '../../utils/paciente.utils';
 import { CommonModule } from '@angular/common';
 import { PacienteService } from '../../services/paciente';
 import { Paciente } from '../../models/paciente.model';
@@ -7,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 // PrimeNG
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
 import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
@@ -29,7 +32,9 @@ import { FloatLabelModule } from 'primeng/floatlabel';
         RippleModule,
         ListboxModule,
         ButtonModule,
-        FloatLabelModule
+        FloatLabelModule,
+        IconFieldModule,
+        InputIconModule
     ],
     templateUrl: './paciente-list.component.html',
     styleUrls: ['./paciente-list.component.scss']
@@ -37,6 +42,11 @@ import { FloatLabelModule } from 'primeng/floatlabel';
 export class PacienteListComponent implements OnInit {
     pacientes: Paciente[] = [];
     searchText = '';
+
+    pacienteAtivo: Paciente | null = null;
+    getInitials = getInitials;
+    getStatusLabel = getStatusLabel;
+    getStatusSeverity = getStatusSeverity;
 
     @Output() pacienteSelecionado = new EventEmitter<string>();
 
@@ -53,36 +63,16 @@ export class PacienteListComponent implements OnInit {
         });
     }
 
-    selecionar(paciente: Paciente) {
+    selecionar(paciente: Paciente): void {
+        this.pacienteAtivo = paciente;
         this.pacienteSelecionado.emit(paciente.id);
     }
 
     filtrarPacientes(): Paciente[] {
         const texto = this.searchText.toLowerCase();
-
         return this.pacientes.filter(p =>
             (p.nome?.toLowerCase().includes(texto) ?? false) ||
             (p.status?.toLowerCase().includes(texto) ?? false)
         );
-    }
-
-    getStatusLabel(status: string): string {
-        switch (status) {
-            case 'in_treatment': return 'Em tratamento';
-            case 'recovery': return 'Em recuperação';
-            case 'admitted': return 'Internado';
-            case 'discharged': return 'Alta';
-            default: return 'Desconhecido';
-        }
-    }
-
-    getSeverity(status: string): string {
-        switch (status) {
-            case 'in_treatment': return 'warn';
-            case 'recovery': return 'success';
-            case 'admitted': return 'info';
-            case 'discharged': return 'secondary';
-            default: return 'contrast';
-        }
     }
 }

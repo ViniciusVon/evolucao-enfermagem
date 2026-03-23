@@ -1,119 +1,96 @@
-<p-card [header]="'Exame Físico'" class="w-full max-w-md m-auto shadow-3"
-    *ngIf="exameFisico && exameFisico.length > 0; else semDados">
-    <div *ngFor="let item of exameFisico" class="p-fluid mb-4 border-bottom pb-4">
-        <div class="field">
-            <label>Paciente:</label>
-            <span>{{ item.pacienteNome }} (ID: {{ item.pacienteId }})</span>
-        </div>
+<div *ngIf="exameFisico.length > 0; else semDados"
+  style="display:flex;flex-direction:column;gap:10px;">
 
-        <div class="field">
-            <label>Abdome:</label>
-            <span>{{ item.abdome }}</span>
-        </div>
+  <div *ngFor="let item of exameFisico" class="med-card">
 
-        <div class="field">
-            <label>Data Exame:</label>
-            <span>{{ item.dataExame | date:'dd/MM/yyyy'}}</span>
-        </div>
-
-        <div class="field">
-            <label>Abdome:</label>
-            <span>{{ item.abdome }}</span>
-        </div>
-
-        <div class="field">
-            <label>Percussão:</label>
-            <span>{{ item.percussao }}</span>
-        </div>
-
-        <div class="field">
-            <label>Pulsos:</label>
-            <span>{{ item.pulsos }}</span>
-        </div>
-
-        <div class="field">
-            <label>Mvf:</label>
-            <span>{{ item.mvf }}</span>
-        </div>
-
-        <div class="field">
-            <label>Cor:</label>
-            <span>{{ item.cor }}</span>
-        </div>
-
-        <p-divider></p-divider>
-
-        <div class="field flex flex-column gap-2">
-            <label>Rass:</label>
-            <span>{{ item.rass }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>PA Sistolica:</label>
-            <span>{{ item.paSistolica }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>PA Diastolica:</label>
-            <span>{{ item.paDiastolica }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>fc:</label>
-            <span>{{ item.fc }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>pulso:</label>
-            <span>{{ item.pulso }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>spO2:</label>
-            <span>{{ item.spO2 }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>tax:</label>
-            <span>{{ item.tax }}</span>
-        </div>
-
-        <div class="field flex flex-wrap gap-2">
-            <p-tag *ngIf="item.rha" severity="success" value="RHA"></p-tag>
-            <p-tag *ngIf="!item.rha" severity="warn" value="Não RHA"></p-tag>
-
-            <p-tag *ngIf="item.ritmoRegular" severity="info" value="Ritmo Regular"></p-tag>
-            <p-tag *ngIf="!item.ritmoRegular" severity="danger" value="Sem Ritmo Regular"></p-tag>
-
-            <p-tag *ngIf="item.taquicardico" severity="success" value="Taquicardico"></p-tag>
-            <p-tag *ngIf="!item.taquicardico" severity="warn" value="Não Taquicardico"></p-tag>
-
-            <p-tag *ngIf="item.tecMaiorQue2Segundos" severity="warn" value="Tec Maior que 2 Segundos"></p-tag>
-            <p-tag *ngIf="!item.tecMaiorQue2Segundos" severity="success" value="Tec Menor que 2 Segundos"></p-tag>
-
-            <p-tag *ngIf="item.semRa" severity="success" value="Sem RA"></p-tag>
-            <p-tag *ngIf="!item.semRa" severity="warn" value="Não Sem RA"></p-tag>
-
-            <p-tag *ngIf="item.toraxSimetrico" severity="danger" value="Torax Simétrico"></p-tag>
-            <p-tag *ngIf="!item.toraxSimetrico" severity="success" value="Não Torax Simétrico"></p-tag>
-
-            <p-tag *ngIf="item.vm" severity="danger" value="VM"></p-tag>
-            <p-tag *ngIf="!item.vm" severity="success" value="Não VM"></p-tag>
-
-            <p-tag *ngIf="item.consciente" severity="danger" value="Consciente"></p-tag>
-            <p-tag *ngIf="!item.consciente" severity="success" value="Não Consciente"></p-tag>
-
-            <p-tag *ngIf="item.semTosseVa" severity="danger" value="Sem Tosse VA"></p-tag>
-            <p-tag *ngIf="!item.semTosseVa" severity="success" value="Não Sem Tosse VA"></p-tag>
-
-            <p-tag *ngIf="item.afebril" severity="danger" value="Afebril"></p-tag>
-            <p-tag *ngIf="!item.afebril" severity="success" value="Não Afebril"></p-tag>
-        </div>
-
-        <p-divider></p-divider>
+    <div class="med-card-header">
+      <div class="med-header-icon">🩺</div>
+      <div class="med-header-text">
+        <h3>Exame Físico</h3>
+        <p>{{ item.pacienteNome }} · {{ item.dataExame | date:'dd/MM/yyyy' }}</p>
+      </div>
     </div>
-</p-card>
+
+    <div class="med-card-body">
+      <div class="med-vitals">
+        <div class="med-vital">
+          <div class="vital-val">{{ item.paSistolica }}<sup>/{{ item.paDiastolica }}</sup></div>
+          <div class="vital-lbl">PA</div>
+        </div>
+        <div class="med-vital">
+          <div class="vital-val">{{ item.fc }}</div>
+          <div class="vital-lbl">FC</div>
+        </div>
+        <div class="med-vital" [class.vital-ok]="item.spO2 >= 95" [class.vital-warn]="item.spO2 < 95 && item.spO2 >= 90" [class.vital-bad]="item.spO2 < 90">
+          <div class="vital-val">{{ item.spO2 }}<sup>%</sup></div>
+          <div class="vital-lbl">SpO₂</div>
+        </div>
+        <div class="med-vital" [class.vital-warn]="item.tax > 37.5" [class.vital-bad]="item.tax > 38.5">
+          <div class="vital-val">{{ item.tax }}<sup>°</sup></div>
+          <div class="vital-lbl">TAX</div>
+        </div>
+        <div class="med-vital">
+          <div class="vital-val">{{ item.pulso }}</div>
+          <div class="vital-lbl">Pulso</div>
+        </div>
+        <div class="med-vital">
+          <div class="vital-val">{{ item.rass }}</div>
+          <div class="vital-lbl">RASS</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;
+                  background:var(--p-content-border-color);">
+        @for (campo of [
+          { label: 'Abdome',    valor: item.abdome },
+          { label: 'Percussão', valor: item.percussao },
+          { label: 'Pulsos',    valor: item.pulsos },
+          { label: 'MVF',       valor: item.mvf },
+          { label: 'Cor',       valor: item.cor }
+        ]; track campo.label) {
+          <div style="background:var(--p-card-background);
+                      padding:10px 14px;
+                      display:flex;flex-direction:column;gap:3px;">
+            <span class="med-label">{{ campo.label }}</span>
+            <span class="med-value">{{ campo.valor || '—' }}</span>
+          </div>
+        }
+        <div style="background:var(--p-card-background);padding:10px 14px;"></div>
+      </div>
+
+      <div class="med-section-label">Indicadores clínicos</div>
+      <div class="med-tags">
+        <p-tag *ngIf="item.rha"  severity="success"   value="RHA"></p-tag>
+        <p-tag *ngIf="!item.rha" severity="secondary" value="Sem RHA"></p-tag>
+
+        <p-tag *ngIf="item.ritmoRegular"  severity="success" value="Ritmo regular"></p-tag>
+        <p-tag *ngIf="!item.ritmoRegular" severity="danger"  value="Ritmo irregular"></p-tag>
+
+        <p-tag *ngIf="item.taquicardico"  severity="warn"      value="Taquicárdico"></p-tag>
+        <p-tag *ngIf="!item.taquicardico" severity="secondary" value="Não taquicárdico"></p-tag>
+
+        <p-tag *ngIf="item.tecMaiorQue2Segundos"  severity="danger"  value="TEC > 2s"></p-tag>
+        <p-tag *ngIf="!item.tecMaiorQue2Segundos" severity="success" value="TEC < 2s"></p-tag>
+
+        <p-tag *ngIf="item.consciente"  severity="success" value="Consciente"></p-tag>
+        <p-tag *ngIf="!item.consciente" severity="danger"  value="Inconsciente"></p-tag>
+
+        <p-tag *ngIf="item.afebril"  severity="success" value="Afebril"></p-tag>
+        <p-tag *ngIf="!item.afebril" severity="danger"  value="Febril"></p-tag>
+
+        <p-tag *ngIf="item.vm"             severity="info"    value="VM"></p-tag>
+        <p-tag *ngIf="item.toraxSimetrico" severity="success" value="Tórax simétrico"></p-tag>
+        <p-tag *ngIf="item.semRa"          severity="success" value="Sem RA"></p-tag>
+        <p-tag *ngIf="item.semTosseVa"     severity="success" value="Sem tosse VA"></p-tag>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <ng-template #semDados>
-    <p class="text-center text-600">Nenhum registro de Exame Físico encontrado para este paciente.</p>
+  <div class="med-empty">
+    <span class="med-empty-title">Sem exame físico registrado</span>
+    <span class="med-empty-sub">Nenhum registro encontrado para este paciente</span>
+  </div>
 </ng-template>

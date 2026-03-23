@@ -1,30 +1,19 @@
-<p-tabs>
-    <p-tablist>
-        <p-tab value="0">HPP</p-tab>
-        <p-tab value="1">Dispositivos</p-tab>
-        <p-tab value="2">Evolução Enfermagem</p-tab>
-        <p-tab value="3">Cefalocaudal</p-tab>
-        <p-tab value="4">Exame Físico</p-tab>
-        <p-tab value="5">Exame Complementar</p-tab>
-    </p-tablist>
-    <p-tabpanels>
-        <p-tabpanel value="0">
-            <app-paciente-hpp [pacienteId]="pacienteId"></app-paciente-hpp>
-        </p-tabpanel>
-        <p-tabpanel value="1">
-            <app-paciente-dispositivos [pacienteId]="pacienteId"></app-paciente-dispositivos>
-        </p-tabpanel>
-        <p-tabpanel value="2">
-            <app-paciente-evolucao-enfermagem [pacienteId]="pacienteId"></app-paciente-evolucao-enfermagem>
-        </p-tabpanel>
-        <p-tabpanel value="3">
-            <app-paciente-cefalocaudal [pacienteId]="pacienteId"></app-paciente-cefalocaudal>
-        </p-tabpanel>
-        <p-tabpanel value="4">
-            <app-paciente-exame-fisico [pacienteId]="pacienteId"></app-paciente-exame-fisico>
-        </p-tabpanel>
-        <p-tabpanel value="5">
-            <app-paciente-exame-complementar [pacienteId]="pacienteId"></app-paciente-exame-complementar>
-        </p-tabpanel>
-    </p-tabpanels>
-</p-tabs>
+<div class="med-page">
+  <div class="med-tabs">
+    <div class="med-tab" [class.active]="abaAtiva === '0'" (click)="abaAtiva = '0'">HPP</div>
+    <div class="med-tab" [class.active]="abaAtiva === '1'" (click)="abaAtiva = '1'">Dispositivos</div>
+    <div class="med-tab" [class.active]="abaAtiva === '2'" (click)="abaAtiva = '2'">Evolução</div>
+    <div class="med-tab" [class.active]="abaAtiva === '3'" (click)="abaAtiva = '3'">Cefalocaudal</div>
+    <div class="med-tab" [class.active]="abaAtiva === '4'" (click)="abaAtiva = '4'">Ex. Físico</div>
+    <div class="med-tab" [class.active]="abaAtiva === '5'" (click)="abaAtiva = '5'">Complementar</div>
+  </div>
+
+  <ng-container [ngSwitch]="abaAtiva">
+    <app-paciente-hpp              *ngSwitchCase="'0'" [pacienteId]="pacienteId"/>
+    <app-paciente-dispositivos     *ngSwitchCase="'1'" [pacienteId]="pacienteId"/>
+    <app-paciente-evolucao-enfermagem *ngSwitchCase="'2'" [pacienteId]="pacienteId"/>
+    <app-paciente-cefalocaudal     *ngSwitchCase="'3'" [pacienteId]="pacienteId"/>
+    <app-paciente-exame-fisico     *ngSwitchCase="'4'" [pacienteId]="pacienteId"/>
+    <app-paciente-exame-complementar *ngSwitchCase="'5'" [pacienteId]="pacienteId"/>
+  </ng-container>
+</div>

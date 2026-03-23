@@ -1,82 +1,53 @@
-<p-card [header]="'Exame Complementar'" class="w-full max-w-md m-auto shadow-3"
-    *ngIf="exameComplementar && exameComplementar.length > 0; else semDados">
-    <div *ngFor="let item of exameComplementar" class="p-fluid mb-4 border-bottom pb-4">
-        <div class="field">
-            <label>Paciente:</label>
-            <span>{{ item.pacienteNome }} (ID: {{ item.pacienteId }})</span>
-        </div>
+<div *ngIf="exameComplementar.length > 0; else semDados"
+  style="display:flex;flex-direction:column;gap:10px;">
 
-        <div class="field">
-            <label>Data Exame:</label>
-            <span>{{ item.dataExame | date:'dd/MM/yyyy'}}</span>
-        </div>
+  <div *ngFor="let item of exameComplementar" class="med-card">
 
-        <p-divider></p-divider>
-
-        <div class="field flex flex-column gap-2">
-            <label>UR:</label>
-            <span>{{ item.ur }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>CR:</label>
-            <span>{{ item.cr }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>HB:</label>
-            <span>{{ item.hb }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>ht:</label>
-            <span>{{ item.ht }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>leucocitos:</label>
-            <span>{{ item.leucocitos }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>plaquetas:</label>
-            <span>{{ item.plaquetas }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>na:</label>
-            <span>{{ item.na }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>k:</label>
-            <span>{{ item.k }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>tgo:</label>
-            <span>{{ item.tgo }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>tgp:</label>
-            <span>{{ item.tgp }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>fal:</label>
-            <span>{{ item.fal }}</span>
-        </div>
-
-        <div class="field flex flex-column gap-2">
-            <label>ggt:</label>
-            <span>{{ item.ggt }}</span>
-        </div>
-
-        <p-divider></p-divider>
+    <div class="med-card-header">
+      <div class="med-header-text">
+        <h3>Exame Complementar</h3>
+        <p>{{ item.pacienteNome }} · {{ item.dataExame | date:'dd/MM/yyyy' }}</p>
+      </div>
     </div>
-</p-card>
+
+    <div class="med-card-body">
+
+      <!-- Exames em grid 2 colunas para leitura rápida -->
+      <div class="med-section-label">Resultados laboratoriais</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;
+                  background:var(--p-content-border-color);">
+
+        @for (campo of [
+          { label: 'UR',        valor: item.ur },
+          { label: 'CR',        valor: item.cr },
+          { label: 'HB',        valor: item.hb },
+          { label: 'HT',        valor: item.ht },
+          { label: 'Leucócitos',valor: item.leucocitos },
+          { label: 'Plaquetas', valor: item.plaquetas },
+          { label: 'NA',        valor: item.na },
+          { label: 'K',         valor: item.k },
+          { label: 'TGO',       valor: item.tgo },
+          { label: 'TGP',       valor: item.tgp },
+          { label: 'FAL',       valor: item.fal },
+          { label: 'GGT',       valor: item.ggt }
+        ]; track campo.label) {
+          <div style="background:var(--p-card-background);
+                      padding:10px 14px;
+                      display:flex;flex-direction:column;gap:3px;">
+            <span class="med-label">{{ campo.label }}</span>
+            <span class="med-value">{{ campo.valor }}</span>
+          </div>
+        }
+
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <ng-template #semDados>
-    <p class="text-center text-600">Nenhum registro de Exame Complementar encontrado para este paciente.</p>
+  <div class="med-empty">
+    <span class="med-empty-title">Sem exames complementares</span>
+    <span class="med-empty-sub">Nenhum registro encontrado para este paciente</span>
+  </div>
 </ng-template>

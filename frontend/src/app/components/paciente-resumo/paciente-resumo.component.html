@@ -1,0 +1,37 @@
+<div class="med-page" *ngIf="paciente; else semPaciente">
+  <div class="med-card">
+    <div class="med-card-header">
+      <p-avatar [label]="getInitials(paciente.nome)" shape="circle"
+        [style]="{'background':'var(--p-primary-100)','color':'var(--p-primary-700)','font-weight':'600','width':'38px','height':'38px'}">
+      </p-avatar>
+      <div class="med-header-text">
+        <h3>{{ paciente.nome }}</h3>
+        <p>ID {{ paciente.id }} · SES {{ paciente.ses }}</p>
+      </div>
+      <p-tag [value]="getStatusLabel(paciente.status)" [severity]="getSeverity(paciente.status)"></p-tag>
+    </div>
+    <div class="med-card-body">
+      <div class="med-vitals">
+        <div class="med-vital">
+          <div class="vital-val">{{ paciente.idade }}<sup>a</sup></div>
+          <div class="vital-lbl">Idade</div>
+        </div>
+        <div class="med-vital">
+          <div class="vital-val">{{ paciente.peso }}<sup>kg</sup></div>
+          <div class="vital-lbl">Peso</div>
+        </div>
+        <div class="med-vital">
+          <div class="vital-val">{{ paciente.altura }}<sup>m</sup></div>
+          <div class="vital-lbl">Altura</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #semPaciente>
+  <div class="med-empty">
+    <span class="med-empty-title">Nenhum paciente selecionado</span>
+    <span class="med-empty-sub">Selecione um paciente na lista</span>
+  </div>
+</ng-template>

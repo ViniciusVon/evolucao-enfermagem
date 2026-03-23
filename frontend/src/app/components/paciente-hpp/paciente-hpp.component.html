@@ -1,49 +1,48 @@
-<p-card [header]="'HPP'" class="w-full max-w-md m-auto shadow-3" *ngIf="hpp && hpp.length > 0; else semDados">
-    <div *ngFor="let item of hpp" class="p-fluid mb-4 border-bottom pb-4">
-        <div class="field">
-            <label>Paciente:</label>
-            <span>{{ item.pacienteNome }} (ID: {{ item.pacienteId }})</span>
-        </div>
+<div *ngIf="hpp.length > 0; else semDados" style="display:flex;flex-direction:column;gap:10px;">
+  <div *ngFor="let item of hpp" class="med-card">
 
-        <div class="field">
-            <label>Medicamentos Uso Continuo:</label>
-            <span>{{ item.medicamentosUsoContinuo }}</span>
-        </div>
-
-        <div class="field">
-            <label>Outras Comorbidades:</label>
-            <span>{{ item.outrasComorbidades }}</span>
-        </div>
-
-        <p-divider></p-divider>
-
-        <div class="field flex flex-wrap gap-2">
-            <p-tag *ngIf="item.has" severity="success" value="Has"></p-tag>
-            <p-tag *ngIf="!item.has" severity="warn" value="Não Has"></p-tag>
-
-            <p-tag *ngIf="item.dm" severity="info" value="DM"></p-tag>
-            <p-tag *ngIf="!item.dm" severity="danger" value="Sem DM"></p-tag>
-
-            <p-tag *ngIf="item.dopc" severity="success" value="DOPC"></p-tag>
-            <p-tag *ngIf="!item.dopc" severity="warn" value="Não DOPC"></p-tag>
-
-            <p-tag *ngIf="item.icc" severity="success" value="ICC"></p-tag>
-            <p-tag *ngIf="!item.icc" severity="warn" value="Não ICC"></p-tag>
-
-            <p-tag *ngIf="item.dac" severity="success" value="DAC"></p-tag>
-            <p-tag *ngIf="!item.dac" severity="warn" value="Não DAC"></p-tag>
-
-            <p-tag *ngIf="item.ave" severity="success" value="AVE"></p-tag>
-            <p-tag *ngIf="!item.ave" severity="warn" value="Não AVE"></p-tag>
-
-            <p-tag *ngIf="item.alergico" severity="success" value="Alérgico"></p-tag>
-            <p-tag *ngIf="!item.alergico" severity="warn" value="Não Alérgico"></p-tag>
-        </div>
-
-        <p-divider></p-divider>
+    <div class="med-card-header">
+      <div class="med-header-text">
+        <h3>Histórico Patológico Prévio</h3>
+        <p>{{ item.pacienteNome }}</p>
+      </div>
     </div>
-</p-card>
+
+    <div class="med-card-body">
+      <div class="med-field">
+        <span class="med-label">Medicamentos uso contínuo</span>
+        <span class="med-value">{{ item.medicamentosUsoContinuo || '—' }}</span>
+      </div>
+      <div class="med-field">
+        <span class="med-label">Outras comorbidades</span>
+        <span class="med-value">{{ item.outrasComorbidades || '—' }}</span>
+      </div>
+
+      <div class="med-section-label">Indicadores</div>
+      <div class="med-tags">
+        <p-tag *ngIf="item.has"      severity="success"   value="HAS"></p-tag>
+        <p-tag *ngIf="!item.has"     severity="secondary" value="Sem HAS"></p-tag>
+        <p-tag *ngIf="item.dm"       severity="info"      value="DM"></p-tag>
+        <p-tag *ngIf="!item.dm"      severity="secondary" value="Sem DM"></p-tag>
+        <p-tag *ngIf="item.dopc"     severity="success"   value="DOPC"></p-tag>
+        <p-tag *ngIf="!item.dopc"    severity="secondary" value="Sem DOPC"></p-tag>
+        <p-tag *ngIf="item.icc"      severity="warn"      value="ICC"></p-tag>
+        <p-tag *ngIf="!item.icc"     severity="secondary" value="Sem ICC"></p-tag>
+        <p-tag *ngIf="item.dac"      severity="warn"      value="DAC"></p-tag>
+        <p-tag *ngIf="!item.dac"     severity="secondary" value="Sem DAC"></p-tag>
+        <p-tag *ngIf="item.ave"      severity="danger"    value="AVE"></p-tag>
+        <p-tag *ngIf="!item.ave"     severity="secondary" value="Sem AVE"></p-tag>
+        <p-tag *ngIf="item.alergico"  severity="warn"     value="Alérgico"></p-tag>
+        <p-tag *ngIf="!item.alergico" severity="secondary" value="Não Alérgico"></p-tag>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <ng-template #semDados>
-    <p class="text-center text-600">Nenhum registro de HPP encontrado para este paciente.</p>
+  <div class="med-empty">
+    <span class="med-empty-title">Nenhum HPP registrado</span>
+    <span class="med-empty-sub">Nenhum histórico encontrado para este paciente</span>
+  </div>
 </ng-template>

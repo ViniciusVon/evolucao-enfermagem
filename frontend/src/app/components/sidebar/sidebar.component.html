@@ -1,0 +1,133 @@
+<div class="sidebar-trigger">
+  <p-button (click)="visible = true" icon="pi pi-bars" [rounded]="true" [outlined]="true"/>
+</div>
+
+<p-drawer #drawerRef [(visible)]="visible">
+  <ng-template #headless>
+    <div class="sidebar-root">
+
+      <!-- HEADER -->
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div>
+            <div class="brand-name">BrubyEnfermagem</div>
+            <div class="brand-sub">UTI Adulto</div>
+          </div>
+        </div>
+        <p-button
+          type="button"
+          (click)="closeCallback($event)"
+          icon="pi pi-times"
+          [rounded]="true"
+          [outlined]="true"
+          size="small"/>
+      </div>
+
+      <!-- PERFIL DO ESTUDANTE -->
+      <div class="sidebar-profile">
+        <p-avatar
+          label="ES"
+          shape="circle"
+          size="large"
+          [style]="{'background':'rgba(255,255,255,0.2)','color':'#fff','font-weight':'700'}"/>
+        <div class="profile-info">
+          <div class="profile-name">Estudante</div>
+          <div class="profile-role">Medicina · 5º período</div>
+        </div>
+        <div class="profile-badge">
+          <span class="online-dot"></span>
+          Ativo
+        </div>
+      </div>
+
+      <!-- PLANTÃO -->
+      <div class="sidebar-plantar">
+        <i class="pi pi-clock" style="font-size:13px;opacity:0.7;"></i>
+        <span>Plantão: 06:00 — 12:00</span>
+      </div>
+
+      <!-- NAVEGAÇÃO -->
+      <div class="sidebar-nav">
+
+        <div class="nav-section-label">Principal</div>
+
+        <a class="nav-item" routerLink="/home" (click)="closeCallback($event)">
+          <div class="nav-icon" style="background:#dbeafe;">
+            <i class="pi pi-home" style="color:#1e40af;"></i>
+          </div>
+          <span class="nav-label">Home</span>
+          <i class="pi pi-chevron-right nav-chevron"></i>
+        </a>
+
+        <a class="nav-item" routerLink="/paciente" (click)="closeCallback($event)">
+          <div class="nav-icon" style="background:#dcfce7;">
+            <i class="pi pi-users" style="color:#166534;"></i>
+          </div>
+          <span class="nav-label">Pacientes</span>
+          <i class="pi pi-chevron-right nav-chevron"></i>
+        </a>
+
+        <div class="nav-section-label">Clínico</div>
+
+        <a class="nav-item" routerLink="/paciente" (click)="closeCallback($event)">
+          <div class="nav-icon" style="background:#fce7f3;">
+            <i class="pi pi-heart" style="color:#9d174d;"></i>
+          </div>
+          <span class="nav-label">Exame Físico</span>
+          <i class="pi pi-chevron-right nav-chevron"></i>
+        </a>
+
+        <a class="nav-item" routerLink="/paciente" (click)="closeCallback($event)">
+          <div class="nav-icon" style="background:#dcfce7;">
+            <i class="pi pi-list" style="color:#166534;"></i>
+          </div>
+          <span class="nav-label">Exame Complementar</span>
+          <i class="pi pi-chevron-right nav-chevron"></i>
+        </a>
+
+        <a class="nav-item" routerLink="/paciente" (click)="closeCallback($event)">
+          <div class="nav-icon" style="background:#ede9fe;">
+            <i class="pi pi-file-edit" style="color:#5b21b6;"></i>
+          </div>
+          <span class="nav-label">Evolução Enfermagem</span>
+          <i class="pi pi-chevron-right nav-chevron"></i>
+        </a>
+
+        <a class="nav-item" routerLink="/paciente" (click)="closeCallback($event)">
+          <div class="nav-icon" style="background:#fef9c3;">
+            <i class="pi pi-chart-bar" style="color:#92400e;"></i>
+          </div>
+          <span class="nav-label">Cefalocaudal</span>
+          <i class="pi pi-chevron-right nav-chevron"></i>
+        </a>
+
+        <a class="nav-item" routerLink="/paciente" (click)="closeCallback($event)">
+          <div class="nav-icon" style="background:#fee2e2;">
+            <i class="pi pi-cog" style="color:#991b1b;"></i>
+          </div>
+          <span class="nav-label">Dispositivos</span>
+          <i class="pi pi-chevron-right nav-chevron"></i>
+        </a>
+
+        <a class="nav-item" routerLink="/paciente" (click)="closeCallback($event)">
+          <div class="nav-icon" style="background:#dbeafe;">
+            <i class="pi pi-folder" style="color:#1e40af;"></i>
+          </div>
+          <span class="nav-label">HPP</span>
+          <i class="pi pi-chevron-right nav-chevron"></i>
+        </a>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="sidebar-footer">
+        <div class="footer-divider"></div>
+        <div class="footer-info">
+          <i class="pi pi-info-circle" style="font-size:13px;opacity:0.6;"></i>
+          <span>BrubyEnfermagem v1.0 · Uso educacional</span>
+        </div>
+      </div>
+
+    </div>
+  </ng-template>
+</p-drawer>

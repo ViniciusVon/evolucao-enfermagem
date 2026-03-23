@@ -1,8 +1,23 @@
-<div class="paciente-container">
-        <div class="paciente-container-left">
-                <app-paciente-list (pacienteSelecionado)="onPacienteSelecionado($event)"></app-paciente-list>
+<div class="med-layout">
+
+  <!-- Em mobile: lista ocupa tela inteira, some ao selecionar -->
+  <div class="med-layout-list" [class.has-selection]="pacienteSelecionadoId">
+    <app-paciente-list
+      (pacienteSelecionado)="onPacienteSelecionado($event)">
+    </app-paciente-list>
+  </div>
+
+  <!-- Em mobile: detalhes aparecem ao selecionar -->
+  <div class="med-layout-detail" *ngIf="pacienteSelecionadoId">
+
+    <!-- Botão voltar (mobile) -->
+    <div class="med-back-btn" (click)="pacienteSelecionadoId = null">
+      <i class="pi pi-arrow-left"></i>
+      <span>Voltar à lista</span>
     </div>
-    <div class="paciente-container-right">
-        <app-paciente-tabs [pacienteId]="pacienteSelecionadoId"></app-paciente-tabs>
-    </div>
+
+    <app-paciente-resumo [pacienteId]="pacienteSelecionadoId"></app-paciente-resumo>
+    <app-paciente-tabs   [pacienteId]="pacienteSelecionadoId"></app-paciente-tabs>
+  </div>
+
 </div>

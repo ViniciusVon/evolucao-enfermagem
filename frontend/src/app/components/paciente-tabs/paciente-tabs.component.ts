@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TabsModule } from 'primeng/tabs';
+import { CommonModule } from '@angular/common';
 
 import { PacienteHppComponent } from '../paciente-hpp/paciente-hpp.component';
 import { PacienteDispositivosComponent } from '../paciente-dispositivos/paciente-dispositivos.component';
@@ -12,17 +12,18 @@ import { PacienteExameComplementarComponent } from '../paciente-exame-complement
     selector: 'app-paciente-tabs',
     standalone: true,
     imports: [
-        TabsModule,
         PacienteHppComponent,
         PacienteDispositivosComponent,
         PacienteEvolucaoEnfermagemComponent,
         PacienteCefalocaudalComponent,
         PacienteExameFisicoComponent,
-        PacienteExameComplementarComponent
+        PacienteExameComplementarComponent,
+        CommonModule
     ],
     templateUrl: './paciente-tabs.component.html',
     styleUrls: ['./paciente-tabs.component.scss']
 })
 export class PacienteTabsComponent {
     @Input() pacienteId: string | null = null;
+    abaAtiva = '0';
 }
